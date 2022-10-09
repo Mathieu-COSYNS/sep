@@ -24,7 +24,7 @@ class Ticket(models.Model):
     label = models.CharField(_('label'), max_length=64)
     price = models.DecimalField(_('price'), decimal_places=2, max_digits=4)
     qrcode_id = models.CharField(
-        _('QR code identifier'), max_length=12, validators=[RegexValidator(r'[A-Z0-9]{12}}', message=_('The QR code identifier must contain exactly 12 characters in the A-Z,0-9 range'))])
+        _('QR code identifier'), max_length=12, validators=[RegexValidator(r'[A-Z0-9]{12}', message=_('The QR code identifier must contain exactly 12 characters in the A-Z,0-9 range'))])
     event = models.ForeignKey(
         'Event', on_delete=CASCADE, verbose_name=_('event'))
 
