@@ -22,7 +22,7 @@ class EventTicketViewSet(viewsets.GenericViewSet):
     serializer_class = TicketSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{8})')
+    @action(detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{12})')
     def qrcode(self, request, pk=None, ticket__qrcode_id=None):
         obj = get_object_or_404(
             Ticket, event=pk, qrcode_id=ticket__qrcode_id)

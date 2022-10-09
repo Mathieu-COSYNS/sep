@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-03 20:29+0200\n"
+"POT-Creation-Date: 2022-10-09 11:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: events/admin.py:17
+#: events/admin.py:19
 msgid "number of tickets sold"
 msgstr "nombre de tickets vendus"
 
-#: events/admin.py:24
+#: events/admin.py:26
 #, python-format
 msgid "%(count)s ticket"
 msgid_plural "%(count)s tickets"
@@ -67,6 +67,7 @@ msgstr "identifiant du code QR"
 
 #: events/models.py:27
 msgid ""
-"The QR code identifier must contain exactly 8 characters in the A-Z,0-9 range"
+"The QR code identifier must contain exactly 12 characters in the A-Z,0-9 "
+"range"
 msgstr ""
-"L'identifiant du code QR doit contenir exactement 8 caractères de A-Z,0-9"
+"L'identifiant du code QR doit contenir exactement 12 caractères de A-Z,0-9"

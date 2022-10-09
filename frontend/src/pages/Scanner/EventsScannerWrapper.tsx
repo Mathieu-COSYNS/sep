@@ -13,7 +13,7 @@ const ScannerSEPWrapper: FC = () => {
 
   const handleScan = async (result: string) => {
     if (isInDialog) return;
-    if (/[A-Z0-9]{8}/.test(result)) {
+    if (/[A-Z0-9]{12}/.test(result)) {
       setIsInDialog(true);
       present({
         message: 'Verification...',
