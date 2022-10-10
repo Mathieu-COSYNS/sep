@@ -12,7 +12,7 @@ import Scanner from './Scanner';
 
 const base58 = new Base58();
 
-const ScannerSEPWrapper: FC = () => {
+const SEPScannerWrapper: FC = () => {
   const navContext = useContext(NavContext);
   const router = useIonRouter();
   const Toast = useToast();
@@ -69,4 +69,4 @@ const ScannerSEPWrapper: FC = () => {
   );
 };
 
-export default ScannerSEPWrapper;
+export default SEPScannerWrapper;

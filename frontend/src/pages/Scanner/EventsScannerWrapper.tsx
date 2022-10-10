@@ -4,12 +4,14 @@ import Scanner from './Scanner';
 import { useIonAlert, useIonLoading } from '@ionic/react';
 import classes from './Scanner.module.scss';
 import environment from 'environment';
+import { useParams } from 'react-router';
 
-const ScannerSEPWrapper: FC = () => {
+const EventsScannerWrapper: FC = () => {
   const Toast = useToast();
   const [isInDialog, setIsInDialog] = useState<boolean>(false);
   const [presentAlert] = useIonAlert();
   const [present, dismiss] = useIonLoading();
+  const { id: eventId } = useParams<{ id: string }>();
 
   const handleScan = async (result: string) => {
     if (isInDialog) return;
@@ -19,7 +21,7 @@ const ScannerSEPWrapper: FC = () => {
         message: 'Verification...',
       });
 
-      const resp = await fetch(`${environment.API_URL}/events/1/${result}/`, {
+      const resp = await fetch(`${environment.API_URL}/events/${eventId}/${result}/`, {
         method: 'GET',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -68,4 +70,4 @@ const ScannerSEPWrapper: FC = () => {
   return <Scanner onScan={handleScan} backButton={false} enableOnlyOnRoute={RegExp(/events\/\d+/)} />;
 };
 
-export default ScannerSEPWrapper;
+export default EventsScannerWrapper;
