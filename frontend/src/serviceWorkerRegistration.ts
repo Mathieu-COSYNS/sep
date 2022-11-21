@@ -34,7 +34,7 @@ export function register(config?: Config): void {
       return;
     }
 
-    window.addEventListener('load', () => {
+    const loadHandler = () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
@@ -53,7 +53,13 @@ export function register(config?: Config): void {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
       }
-    });
+    };
+
+    if (document.readyState === 'complete') {
+      loadHandler();
+    } else {
+      window.addEventListener('load', loadHandler);
+    }
   }
 }
 
