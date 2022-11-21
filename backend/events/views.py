@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, mixins
+from django.http import Http404
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -22,10 +23,22 @@ class EventTicketViewSet(viewsets.GenericViewSet):
     serializer_class = TicketSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{12})')
-    def qrcode(self, request, pk=None, ticket__qrcode_id=None):
-        obj = get_object_or_404(
-            Ticket, event=pk, qrcode_id=ticket__qrcode_id)
+    def get_serialized_obj(self, pk, ticket__qrcode_id):
+        try:
+            int(pk)
+        except ValueError:
+            raise Http404
+        obj = get_object_or_404(Ticket, event=pk, qrcode_id=ticket__qrcode_id)
         self.check_object_permissions(self.request, obj)
         serializer = self.get_serializer(obj)
-        return Response(serializer.data)
+        return serializer.data
+
+    @action(methods=['GET'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{8})')
+    def get_qrcode(self, request, pk=None, ticket__qrcode_id=None):
+        return Response(self.get_serialized_obj(pk, ticket__qrcode_id))
+
+    @action(methods=['DELETE'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{8})')
+    def delete_qrcode(self, request, pk=None, ticket__qrcode_id=None):
+        data = self.get_serialized_obj(pk, ticket__qrcode_id)
+        Ticket.objects.filter(event=pk, qrcode_id=ticket__qrcode_id).delete()
+        return Response(data)

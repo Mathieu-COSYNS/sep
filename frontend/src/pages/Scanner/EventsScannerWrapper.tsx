@@ -22,7 +22,7 @@ const EventsScannerWrapper: FC = () => {
       });
 
       const resp = await fetch(`${environment.API_URL}/events/${eventId}/${result}/`, {
-        method: 'GET',
+        method: 'DELETE',
         headers: new Headers({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
