@@ -23,7 +23,7 @@ const VITE_APP_QR_CODE_URL = (): string => {
 
 const VITE_APP_VERSION_NUMBER = (): string => import.meta.env.VITE_APP_VERSION || '0.0.0';
 
-const VITE_APP_VERCEL_GIT_COMMIT_SHA = (): string => import.meta.env.VITE_APP_VERCEL_GIT_COMMIT_SHA || '-';
+const VITE_VERCEL_GIT_COMMIT_SHA = (): string => import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || '-';
 
 const VITE_APP_SHORT_NAME = (): string | undefined => import.meta.env.VITE_APP_SHORT_NAME;
 
@@ -33,7 +33,7 @@ const environment: Environment = {
   API_URL: VITE_APP_API_URL(),
   QR_CODE_URL: VITE_APP_QR_CODE_URL(),
   VERSION_NUMBER: VITE_APP_VERSION_NUMBER(),
-  VERSION_GIT_SHA: VITE_APP_VERCEL_GIT_COMMIT_SHA(),
+  VERSION_GIT_SHA: VITE_VERCEL_GIT_COMMIT_SHA(),
   APP_SHORT_NAME: VITE_APP_SHORT_NAME(),
   APP_NAME: VITE_APP_NAME(),
 };
