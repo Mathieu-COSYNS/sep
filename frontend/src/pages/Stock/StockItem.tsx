@@ -1,10 +1,10 @@
 import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
-import ListItem, { ListItemButton } from 'components/ListItem';
+import ListItem, { ListItemButton } from '@/components/ListItem';
 import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { FC } from 'react';
-import { Product } from 'types/Product';
-import { Base58 } from 'utils/base58';
-import { removeDecimalZeros } from 'utils/math';
+import { Product } from '@/types/Product';
+import { Base58 } from '@/utils/base58';
+import { removeDecimalZeros } from '@/utils/math';
 import classes from './Stock.module.scss';
 
 const base58 = new Base58();

@@ -1,13 +1,13 @@
 import { IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonSkeletonText, IonToggle } from '@ionic/react';
-import Page from 'components/Page';
-import environment from 'environment';
+import Page from '@/components/Page';
+import environment from '@/environment';
 import { useEffect, useState, FC } from 'react';
 import QRCodeGenerator from 'react-qr-code';
 import { useParams } from 'react-router';
-import { useAppDispatch } from 'redux/hooks';
-import { loadQrCode, useQrCode } from 'redux/qrCodeSlice';
-import { typesMap, TypesMapKeys } from 'types/typesMap';
-import { Base58 } from 'utils/base58';
+import { useAppDispatch } from '@/redux/hooks';
+import { loadQrCode, useQrCode } from '@/redux/qrCodeSlice';
+import { typesMap, TypesMapKeys } from '@/types/typesMap';
+import { Base58 } from '@/utils/base58';
 import classes from './QrCode.module.scss';
 
 const base58 = new Base58();

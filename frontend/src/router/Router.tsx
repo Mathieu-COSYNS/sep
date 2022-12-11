@@ -1,22 +1,22 @@
 import { IonAlert, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Menu from 'components/Menu';
-import { NotFound } from 'pages/ErrorPages';
-import Stock from 'pages/Stock/Stock';
-import Sales from 'pages/Sales';
-import Entries from 'pages/Entries';
-import Basket from 'pages/Basket';
-import Scanner from 'pages/Scanner';
+import Menu from '@/components/Menu';
+import { NotFound } from '@/pages/ErrorPages';
+import Stock from '@/pages/Stock/Stock';
+import Sales from '@/pages/Sales';
+import Entries from '@/pages/Entries';
+import Basket from '@/pages/Basket';
+import Scanner from '@/pages/Scanner';
 import RestrictedRoute, { AccessLevel } from './RestrictedRoute';
-import QrCode from 'pages/QrCode';
-import Login from 'pages/Login';
-import { useUser } from 'redux/userSlice';
-import Packs from 'pages/Packs';
+import QrCode from '@/pages/QrCode';
+import Login from '@/pages/Login';
+import { useUser } from '@/redux/userSlice';
+import Packs from '@/pages/Packs';
 import { FC, useRef, useState } from 'react';
-import LeavePrompt from 'components/LeavePrompt';
-import { useAppDispatch } from 'redux/hooks';
-import { initializeNewSale } from 'redux/basketSlice';
+import LeavePrompt from '@/components/LeavePrompt';
+import { useAppDispatch } from '@/redux/hooks';
+import { initializeNewSale } from '@/redux/basketSlice';
 
 const Router: FC = () => {
   const user = useUser();

@@ -1,16 +1,16 @@
-import Page from 'components/Page';
+import Page from '@/components/Page';
 import { useState, FC } from 'react';
 import { useFormik } from 'formik';
 import { IonInput, IonItem, IonLabel, IonNote, IonSpinner, useIonRouter } from '@ionic/react';
 import classes from './Login.module.scss';
 import * as yup from 'yup';
-import { loginUser } from 'api/userAPI';
-import FormSubmitButton from 'components/FormSubmitButton';
-import Message from 'components/Message';
-import { useAppDispatch } from 'redux/hooks';
-import { login } from 'redux/userSlice';
-import RequiredAsterisk from 'components/RequiredAsterisk';
-import { serializeError } from 'utils/errors';
+import { loginUser } from '@/api/userAPI';
+import FormSubmitButton from '@/components/FormSubmitButton';
+import Message from '@/components/Message';
+import { useAppDispatch } from '@/redux/hooks';
+import { login } from '@/redux/userSlice';
+import RequiredAsterisk from '@/components/RequiredAsterisk';
+import { serializeError } from '@/utils/errors';
 
 interface LoginFormValues {
   username: string;

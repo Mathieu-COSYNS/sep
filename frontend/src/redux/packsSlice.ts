@@ -1,8 +1,8 @@
 import { AsyncState } from '../types/AsyncState';
 import { RootState } from './store';
 import { useAppSelector } from './hooks';
-import { Pack } from 'types/Pack';
-import { packApi } from 'api/packAPI';
+import { Pack } from '@/types/Pack';
+import { packApi } from '@/api/packAPI';
 import { createRestSlice } from './rest';
 
 export const { slice, extraReducers } = createRestSlice({

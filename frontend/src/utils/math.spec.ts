@@ -1,4 +1,4 @@
-import { removeDecimalZeros } from 'utils/math';
+import { removeDecimalZeros } from '@/utils/math';
 
 describe('math removeDecimalZeros', () => {
   it.each`

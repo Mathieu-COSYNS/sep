@@ -1,5 +1,5 @@
 import { IonFab, IonFabButton, IonIcon, IonLabel } from '@ionic/react';
-import useBreakpoints from 'hooks/useBreakpoints';
+import useBreakpoints from '@/hooks/useBreakpoints';
 import { FC } from 'react';
 import classes from './Fab.module.scss';
 
