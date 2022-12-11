@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Prompt } from 'react-router';
 import { useBeforeUnload } from 'react-use';
-import { useIsBasketDirty } from 'redux/basketSlice';
+import { useIsBasketDirty } from '@/redux/basketSlice';
 
 const LeavePrompt: FC = () => {
   const basketDirty = useIsBasketDirty();

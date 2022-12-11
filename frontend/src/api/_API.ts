@@ -1,8 +1,8 @@
-import environment from 'environment';
-import { BaseEditableObject } from 'types/BaseEditableObject';
-import { BaseObject } from 'types/BaseObject';
-import { Id } from 'types/Id';
-import { RequestStatusError } from 'types/RequestStatusError';
+import environment from '@/environment';
+import { BaseEditableObject } from '@/types/BaseEditableObject';
+import { BaseObject } from '@/types/BaseObject';
+import { Id } from '@/types/Id';
+import { RequestStatusError } from '@/types/RequestStatusError';
 
 export class ReadApi<ReadDataType extends BaseObject> {
   private _slug: string;

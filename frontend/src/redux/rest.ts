@@ -7,12 +7,12 @@ import {
   ValidateSliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { AsyncState } from '../types/AsyncState';
-import { ReadApi, CRUDApi, isCRUDApi } from 'api/_API';
-import { Id } from 'types/Id';
+import { ReadApi, CRUDApi, isCRUDApi } from '@/api/_API';
+import { Id } from '@/types/Id';
 import { createDraft, Draft } from 'immer';
-import { BaseObject } from 'types/BaseObject';
-import { BaseEditableObject } from 'types/BaseEditableObject';
-import { serializeError } from 'utils/errors';
+import { BaseObject } from '@/types/BaseObject';
+import { BaseEditableObject } from '@/types/BaseEditableObject';
+import { serializeError } from '@/utils/errors';
 
 export interface APISliceOptions<
   ReadDataType extends BaseObject,

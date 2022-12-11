@@ -4,6 +4,7 @@
   "appName": "Solvay - Entraide & Publication",
   "appShortName": "SEP",
   "appDescription": "Une application web pour aider à la gestion des ventes du SEP.",
+  "qrCodeUrl": "",
   "screenshots": [
     {
       "src": "/assets/screenshots/screenshot_login.png",

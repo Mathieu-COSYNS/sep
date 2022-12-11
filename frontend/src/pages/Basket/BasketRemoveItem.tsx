@@ -1,8 +1,8 @@
 import { AlertButton, IonAlert } from '@ionic/react';
 import { FC } from 'react';
-import { removeOneProductById, removeItemByProductId } from 'redux/basketSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { EditableSaleItem } from 'types/SaleItem';
+import { removeOneProductById, removeItemByProductId } from '@/redux/basketSlice';
+import { useAppDispatch } from '@/redux/hooks';
+import { EditableSaleItem } from '@/types/SaleItem';
 
 export interface BasketRemoveItemProps {
   saleItem?: EditableSaleItem;

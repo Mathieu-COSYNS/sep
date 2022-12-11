@@ -1,10 +1,10 @@
 import { IonItem } from '@ionic/react';
-import Page from 'components/Page';
-import StateAwareList from 'components/StateAwareList';
+import Page from '@/components/Page';
+import StateAwareList from '@/components/StateAwareList';
 import { capitalize } from 'lodash';
 import { FC, useEffect } from 'react';
-import { loadEntries, useEntries } from 'redux/entriesSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { loadEntries, useEntries } from '@/redux/entriesSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import EntryItem from './EntryItem';
 import EntryLoading from './EntryLoading';
 import shared_classes from '../shared.module.scss';
