@@ -33,11 +33,11 @@ class EventTicketViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(obj)
         return serializer.data
 
-    @action(methods=['GET'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{8})')
+    @action(methods=['GET'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{12})')
     def get_qrcode(self, request, pk=None, ticket__qrcode_id=None):
         return Response(self.get_serialized_obj(pk, ticket__qrcode_id))
 
-    @action(methods=['DELETE'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{8})')
+    @action(methods=['DELETE'], detail=True, url_path='(?P<ticket__qrcode_id>[A-Z0-9]{12})')
     def delete_qrcode(self, request, pk=None, ticket__qrcode_id=None):
         data = self.get_serialized_obj(pk, ticket__qrcode_id)
         Ticket.objects.filter(event=pk, qrcode_id=ticket__qrcode_id).delete()
