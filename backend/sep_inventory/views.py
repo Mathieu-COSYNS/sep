@@ -61,13 +61,16 @@ class SaleViewSet(ReadWriteSerializerViewSet):
 def get_sale_report(request):
     products = Product.objects.all()
     sales = Sale.objects.filter(deleted_date__isnull=True)
+    product_columns = ['id', 'name', 'buy_price', 'sell_price']
     product_df = pd.DataFrame.from_records(
-        products.values('id', 'name', 'buy_price', 'sell_price')
+        products.values('id', 'name', 'buy_price', 'sell_price'),
+        columns=product_columns
     )
     sales_df = pd.DataFrame.from_records(
         sales.values('items')
         .annotate(created_date=TruncDate('created_date'))
-        .annotate(Sum('sale_to_product__quantity'))
+        .annotate(Sum('sale_to_product__quantity')),
+        columns=['items', 'created_date', 'sale_to_product__quantity__sum']
     )
 
     sales_df = sales_df.pivot(index='items', columns='created_date')
@@ -76,7 +79,9 @@ def get_sale_report(request):
     sales_df.rename(columns={'items': 'id'}, inplace=True)
     sales_df.fillna(0, inplace=True)
 
-    df = pd.merge(product_df, sales_df)
+    df = pd.merge(product_df, sales_df, how='left')
+    df = df[product_columns +
+            [col for col in sales_df.columns if col not in product_columns]]
     df = df.T.set_index(np.concatenate((np.repeat('Products', 4),
                         np.repeat('Sales', df.shape[1] - 4))), append=True).T
     df = df.swaplevel(0, 1, 1)

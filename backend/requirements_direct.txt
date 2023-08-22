@@ -1,0 +1,11 @@
+Django
+django-cors-headers
+django-lang-switch
+django-on-heroku
+djangorestframework
+gunicorn
+numpy
+openpyxl
+pandas
+PyYAML
+uritemplate

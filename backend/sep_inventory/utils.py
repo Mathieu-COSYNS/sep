@@ -27,7 +27,7 @@ def excel_response_from_df(df, filename, sheet_name=None, multi_index=False, wor
         if worksheet_callback:
             worksheet_callback(ws)
 
-        writer.save()
+        writer.close()
 
         # Set up the Http response.
         response = HttpResponse(
