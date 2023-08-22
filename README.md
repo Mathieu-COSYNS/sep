@@ -6,14 +6,14 @@ Le but de se projet est d'offrir un moyen simple et efficace pour gérer un stoc
 
 Le projet est "séparé" en 2 applications différentes:
 
-- Une REST API avec python et django
-- Une Interface avec Ionic et React
+- Une REST API + un panneau d’administration avec python et Django
+- Une Interface "mobile" avec Ionic et React
 
-### REST API
+### REST API + Panneau d’administration
 
-La REST API est la partie chargée d'ajouter, mettre à jour, supprimer et stocker les données. Ces données sont sauvegardées dans une base de données compatible avec django. On accède à ces données via des requêtes HTTP selon les principes standard des REST API.
+La REST API est la partie chargée d'ajouter, mettre à jour, supprimer et stocker les données. Ces données sont sauvegardées dans une base de données compatible avec Django. On accède à ces données via des requêtes HTTP selon les principes standard des REST API.
 
-L'API est développée avec django, les données sont accessibles par un utilisateur "staff" via le panel django admin. Ce panel offre une manière alternative des gérer les données en cas d'erreur dans "l'interface".
+L'API est développée avec Django, les données sont accessibles par un utilisateur "staff" via le panel Django admin. Ce panel offre une manière alternative des gérer les données en cas d'erreur dans "l'interface".
 
 Une documentation Open API Spec de l'API Rest est auto-généré et rendue accessible via Swagger-UI.
 
