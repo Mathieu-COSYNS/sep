@@ -80,7 +80,7 @@
       "destination": "/test"
     },
     {
-      "source": "/*",
+      "source": "/(.*)",
       "destination": "/"
     }
   ]
