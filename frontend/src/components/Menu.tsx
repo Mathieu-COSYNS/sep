@@ -129,9 +129,11 @@ const Menu: FC = () => {
                     lines="none"
                     detail={false}
                   >
-                    <IonIcon slot="start" ios={menuEntry.iosIcon} md={menuEntry.mdIcon} />
+                    <IonIcon slot="start" ios={menuEntry.iosIcon} md={menuEntry.mdIcon} aria-hidden />
                     <IonLabel>{menuEntry.title}</IonLabel>
-                    {menuEntry.external && <IonIcon slot="end" ios={openOutline} md={openOutline} />}
+                    {menuEntry.external && (
+                      <IonIcon slot="end" ios={openOutline} md={openOutline} aria-label="Lien externe" />
+                    )}
                   </IonItem>
                 </IonMenuToggle>
               </Fragment>

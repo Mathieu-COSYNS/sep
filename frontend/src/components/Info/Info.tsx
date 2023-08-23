@@ -35,8 +35,14 @@ const Info: FC<InfoProps> = ({ infos, children }) => {
   return (
     <div className={classes.container}>
       {children}
-      <button className={classes.info_button} ref={ref} onClick={handleClick} type="button">
-        <IonIcon md={informationCircleOutline} ios={informationCircleSharp} />
+      <button
+        className={classes.info_button}
+        ref={ref}
+        onClick={handleClick}
+        type="button"
+        aria-label="Plus d'informations"
+      >
+        <IonIcon md={informationCircleOutline} ios={informationCircleSharp} aria-hidden />
       </button>
       <IonAlert
         isOpen={state.clicked}

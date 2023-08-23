@@ -18,8 +18,8 @@ const Message: FC<MessageProps> = ({ onDismiss, color, disabled, mode, children 
       <IonCardContent className={classes.container}>
         <div>{children}</div>
         {onDismiss && (
-          <IonButton fill="clear" shape="round" size="small" onClick={() => onDismiss()}>
-            <IonIcon slot="icon-only" ios={closeOutline} md={closeSharp} />
+          <IonButton fill="clear" shape="round" size="small" onClick={() => onDismiss()} aria-label="Fermer">
+            <IonIcon slot="icon-only" ios={closeOutline} md={closeSharp} aria-hidden />
           </IonButton>
         )}
       </IonCardContent>

@@ -87,12 +87,12 @@ main > slot{
                   onClick={handleLogoutClick}
                 >
                   <span>Se déconnecter</span>
-                  <IonIcon slot="end" ios={logOutOutline} md={logOutSharp} />
+                  <IonIcon slot="end" ios={logOutOutline} md={logOutSharp} aria-hidden />
                 </IonButton>
               ) : (
                 <IonButton fill="clear" size="small" shape="round" className={classes.logout} routerLink="/connexion/">
                   <span>Se Connecter</span>
-                  <IonIcon slot="end" ios={logInOutline} md={logInSharp} />
+                  <IonIcon slot="end" ios={logInOutline} md={logInSharp} aria-hidden />
                 </IonButton>
               )}
             </IonButtons>

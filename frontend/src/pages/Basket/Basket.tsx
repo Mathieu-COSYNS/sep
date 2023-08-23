@@ -107,8 +107,8 @@ const Basket: FC = () => {
         onDidFinish={handlePaymentPromptFinish}
       />
       <IonFab className={classes.scanner_btn} vertical="bottom" horizontal="end" slot="fixed">
-        <IonFabButton routerLink="/ventes/scanner/">
-          <IonIcon ios={qrCodeOutline} md={qrCodeSharp} />
+        <IonFabButton routerLink="/ventes/scanner/" aria-label="Scan un QRcode">
+          <IonIcon ios={qrCodeOutline} md={qrCodeSharp} aria-hidden />
         </IonFabButton>
       </IonFab>
     </Page>

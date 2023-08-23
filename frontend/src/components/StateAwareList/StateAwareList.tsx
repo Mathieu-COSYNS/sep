@@ -100,7 +100,7 @@ const StateAwareList = <Item,>({
     toolbarButtons = [
       ...(toolbarButtons || []),
       <IonButton key="refresher" fill="clear" shape="round" onClick={onRefresh}>
-        <IonIcon slot="start" ios={refreshOutline} md={refreshSharp} />
+        <IonIcon slot="start" ios={refreshOutline} md={refreshSharp} aria-hidden />
         Mettre à jour
       </IonButton>,
     ];

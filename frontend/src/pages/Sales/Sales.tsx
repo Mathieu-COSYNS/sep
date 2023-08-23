@@ -40,11 +40,11 @@ const Sales: FC = () => {
         state={{ isLoading: sales.isLoading, items: sales.data, error: sales.error }}
         toolbarButtons={[
           <IonButton key="1" fill="clear" shape="round" onClick={handleAddButtonClick}>
-            <IonIcon slot="start" ios={addOutline} md={addSharp} />
+            <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
             Nouvelle vente
           </IonButton>,
           <IonButton key="2" fill="clear" shape="round" onClick={handleDownloadReportButtonClick}>
-            <IonIcon slot="start" ios={downloadOutline} md={downloadSharp} />
+            <IonIcon slot="start" ios={downloadOutline} md={downloadSharp} aria-hidden />
             Télécharger
           </IonButton>,
         ]}

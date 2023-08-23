@@ -115,7 +115,7 @@ const ScannerBox: React.FC<{
           <div>
             <p>Aucun accès à la caméra</p>
             <IonButton type="button" onClick={openImageDialog}>
-              <IonIcon icon={cloudUpload} slot="start" />
+              <IonIcon icon={cloudUpload} slot="start" aria-hidden />
               Ajouter une image
             </IonButton>
           </div>

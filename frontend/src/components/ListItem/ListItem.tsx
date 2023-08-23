@@ -16,6 +16,7 @@ export interface ListItemProps {
 
 export interface ListItemButton {
   id: string;
+  label: string;
   iosIcon: string;
   mdIcon: string;
   onClick: () => void;
@@ -45,6 +46,7 @@ const ListItem: FC<ListItemProps> = ({
       ...customButtons,
       {
         id: 'edit',
+        label: 'Modifier',
         iosIcon: pencilOutline,
         mdIcon: pencilSharp,
         onClick: onClickEditButton,
@@ -57,6 +59,7 @@ const ListItem: FC<ListItemProps> = ({
       ...customButtons,
       {
         id: 'delete',
+        label: 'Supprimer',
         iosIcon: trashBinOutline,
         mdIcon: trashBinSharp,
         onClick: onClickDeleteButton,
@@ -85,8 +88,14 @@ const ListItem: FC<ListItemProps> = ({
             <div className={classes.content}>
               <div>{children}</div>
               {buttons.map((button) => (
-                <IonButton key={button.id} className={classes.button} onClick={button.onClick} color={button.color}>
-                  <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} />
+                <IonButton
+                  key={button.id}
+                  className={classes.button}
+                  onClick={button.onClick}
+                  color={button.color}
+                  aria-label={button.label}
+                >
+                  <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
                 </IonButton>
               ))}
             </div>
@@ -96,8 +105,8 @@ const ListItem: FC<ListItemProps> = ({
       </IonItem>
       <IonItemOptions side="end">
         {buttons.map((button) => (
-          <IonItemOption key={button.id} onClick={button.onClick} color={button.color}>
-            <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} />
+          <IonItemOption key={button.id} onClick={button.onClick} color={button.color} aria-label={button.label}>
+            <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
           </IonItemOption>
         ))}
       </IonItemOptions>

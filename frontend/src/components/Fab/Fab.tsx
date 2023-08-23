@@ -16,7 +16,7 @@ const Fab: FC<FabProps> = ({ text, iosIcon, mdIcon }) => {
   return (
     <IonFab className={classes.fab} vertical="bottom" horizontal={small ? 'end' : 'start'} slot="fixed">
       <IonFabButton className={classes.fab_button} routerLink="/ventes/scanner/">
-        <IonIcon ios={iosIcon} md={mdIcon} />
+        <IonIcon ios={iosIcon} md={mdIcon} aria-hidden />
         <IonLabel className={classes.label}>{text}</IonLabel>
       </IonFabButton>
     </IonFab>

@@ -54,7 +54,7 @@ const Stock: FC = () => {
         toolbarButtons={
           [
             // <IonButton key="1" fill="clear" shape="round">
-            //   <IonIcon slot="start" ios={addOutline} md={addSharp} />
+            //   <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
             //   Nouveau produit
             // </IonButton>,
           ]

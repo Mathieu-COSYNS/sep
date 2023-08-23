@@ -19,7 +19,7 @@ const ErrorPage: FC<ErrorPageProps> = ({ title, code, explanation }) => {
           <p>{explanation}</p>
         </div>
         <IonButton className={classes.back_button} color="primary" routerLink="/" routerDirection="back" expand="block">
-          <IonIcon icon={arrowBackOutline} slot="start" />
+          <IonIcon icon={arrowBackOutline} slot="start" aria-hidden />
           {"Retour à la page d'accueil"}
         </IonButton>
       </div>
