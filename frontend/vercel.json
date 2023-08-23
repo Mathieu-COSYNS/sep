@@ -3,6 +3,17 @@
     "silent": true
   },
   "trailingSlash": true,
+  "headers": [
+    {
+      "source": "*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/admin/",
@@ -63,6 +74,14 @@
           "value": "sep-ten.vercel.app"
         }
       ]
+    },
+    {
+      "source": "/t",
+      "destination": "/test"
+    },
+    {
+      "source": "/*",
+      "destination": "/"
     }
   ]
 }
