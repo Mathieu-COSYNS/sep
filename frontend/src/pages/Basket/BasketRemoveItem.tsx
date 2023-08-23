@@ -40,7 +40,7 @@ const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss })
       {
         text: 'Annuler',
         role: 'cancel',
-      }
+      },
     );
   }
 

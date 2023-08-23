@@ -1,7 +1,7 @@
 module.exports = {
-  extends: 'stylelint-config-sass-guidelines',
+  extends: ['stylelint-config-sass-guidelines'],
   plugins: ['stylelint-order'],
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tx', '**/*.tsx'],
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', 'dist/**'],
   rules: {
     'selector-no-qualifying-type': [
       true,

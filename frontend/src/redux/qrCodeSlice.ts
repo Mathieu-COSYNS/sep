@@ -33,7 +33,7 @@ export const loadQrCode = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(JSON.stringify(e));
     }
-  }
+  },
 );
 
 export const qrCodeSlice = createSlice({

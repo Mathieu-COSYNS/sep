@@ -3,7 +3,7 @@ import { useState, FC } from 'react';
 import { useFormik } from 'formik';
 import { IonInput, IonItem, IonLabel, IonNote, IonSpinner, useIonRouter } from '@ionic/react';
 import classes from './Login.module.scss';
-import * as yup from 'yup';
+import { object, string } from 'yup';
 import { loginUser } from '@/api/userAPI';
 import FormSubmitButton from '@/components/FormSubmitButton';
 import Message from '@/components/Message';
@@ -17,9 +17,9 @@ interface LoginFormValues {
   password: string;
 }
 
-const validationSchema = yup.object({
-  username: yup.string().required('Le nom est requis'),
-  password: yup.string().required('Mot de passe requis'),
+const validationSchema = object({
+  username: string().required('Le nom est requis'),
+  password: string().required('Mot de passe requis'),
 });
 
 const Login: FC = () => {

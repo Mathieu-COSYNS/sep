@@ -37,7 +37,7 @@ const Entries: FC = () => {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
-            })
+            }),
           )
         }
         renderGroup={(group, entries) => (

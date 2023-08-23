@@ -9,8 +9,8 @@
 /coverage
 
 # production
-/build
-/dist
+build/
+dist/
 
 # misc
 .DS_Store
@@ -27,3 +27,6 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
+
+# env
+.env

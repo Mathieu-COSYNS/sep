@@ -7,7 +7,7 @@ test('renders without crashing', () => {
   const { baseElement } = render(
     <Provider store={store}>
       <App />
-    </Provider>
+    </Provider>,
   );
   expect(baseElement).toBeDefined();
 });

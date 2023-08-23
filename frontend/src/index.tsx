@@ -17,7 +17,7 @@ if (container) {
           <App />
         </Provider>
       </PWAContextProvider>
-    </StrictMode>
+    </StrictMode>,
   );
 }
 

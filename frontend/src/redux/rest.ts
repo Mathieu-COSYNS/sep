@@ -17,7 +17,7 @@ import { serializeError } from '@/utils/errors';
 export interface APISliceOptions<
   ReadDataType extends BaseObject,
   SaveDataType extends BaseEditableObject,
-  CR extends SliceCaseReducers<AsyncState<ReadDataType[]>> = SliceCaseReducers<AsyncState<ReadDataType[]>>
+  CR extends SliceCaseReducers<AsyncState<ReadDataType[]>> = SliceCaseReducers<AsyncState<ReadDataType[]>>,
 > {
   name: string;
   api: ReadApi<ReadDataType> | CRUDApi<ReadDataType, SaveDataType>;
@@ -62,7 +62,7 @@ export const createRestSlice = <ReadDataType extends BaseObject, SaveDataType ex
       } catch (e) {
         return rejectWithValue(serializeError(e));
       }
-    }
+    },
   );
 
   const deleteById = createAsyncThunk(`${name}/deleteById`, async ({ id }: { id: Id }, { rejectWithValue }) => {
@@ -76,7 +76,7 @@ export const createRestSlice = <ReadDataType extends BaseObject, SaveDataType ex
 
   const insertNewData = (
     state: Draft<AsyncState<ReadDataType[]>>,
-    action: PayloadAction<ReadDataType | undefined, string, unknown, never>
+    action: PayloadAction<ReadDataType | undefined, string, unknown, never>,
   ) => {
     if (state.data && action.payload) {
       const payloadIndex = state.data.findIndex((value) => value.id === action.payload?.id);

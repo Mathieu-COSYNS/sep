@@ -42,7 +42,7 @@ export class ReadApi<ReadDataType extends BaseObject> {
 
 export class CRUDApi<
   ReadDataType extends BaseObject,
-  SaveDataType extends BaseEditableObject
+  SaveDataType extends BaseEditableObject,
 > extends ReadApi<ReadDataType> {
   private _saveSerializer?: (data: SaveDataType) => string;
 
@@ -85,7 +85,7 @@ export class CRUDApi<
 }
 
 export const isCRUDApi = <ReadDataType extends BaseObject, SaveDataType extends BaseEditableObject>(
-  api: ReadApi<ReadDataType> | CRUDApi<ReadDataType, SaveDataType>
+  api: ReadApi<ReadDataType> | CRUDApi<ReadDataType, SaveDataType>,
 ): api is CRUDApi<ReadDataType, SaveDataType> => {
   return !!(api as CRUDApi<ReadDataType, SaveDataType>).deleteById;
 };

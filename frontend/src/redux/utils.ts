@@ -3,7 +3,7 @@ import { AsyncState } from '../types/AsyncState';
 
 export const addAsyncThunk = <State extends AsyncState<unknown>, ThunkResult, ThunkParam>(
   builder: ActionReducerMapBuilder<State>,
-  thunk: AsyncThunk<ThunkResult, ThunkParam, Record<string, never>>
+  thunk: AsyncThunk<ThunkResult, ThunkParam, Record<string, never>>,
 ): void => {
   builder
     .addCase(thunk.pending, (state) => {

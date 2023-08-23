@@ -14,7 +14,7 @@ const useBreakpoints = (): {
     (breakpoint: 'sm' | 'md' | 'lg' | 'xl'): boolean => {
       return BREAKPOINTS_NAMES.indexOf(breakpoint) <= BREAKPOINTS_NAMES.indexOf(currentBreakpoint);
     },
-    [currentBreakpoint]
+    [currentBreakpoint],
   );
 
   return {

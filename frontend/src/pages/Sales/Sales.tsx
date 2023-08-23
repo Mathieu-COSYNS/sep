@@ -60,7 +60,7 @@ const Sales: FC = () => {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
-            })
+            }),
           )
         }
         renderGroup={(group, items) => (
