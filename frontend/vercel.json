@@ -76,12 +76,12 @@
       ]
     },
     {
-      "source": "/t",
-      "destination": "/test"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
+    },
+    {
+      "source": "/t",
+      "destination": "/test"
     }
   ]
 }
