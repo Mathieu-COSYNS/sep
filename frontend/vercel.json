@@ -5,7 +5,7 @@
   "trailingSlash": true,
   "headers": [
     {
-      "source": "*",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -74,6 +74,10 @@
           "value": "sep-ten.vercel.app"
         }
       ]
+    },
+    {
+      "source": "/t",
+      "destination": "/test"
     },
     {
       "source": "/(.*)",
