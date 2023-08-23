@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "types": ["vite/client", "node", "jest", "@testing-library/jest-dom"],
+    "types": ["vite/client", "vitest/globals", "node", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["src/*"]
     }

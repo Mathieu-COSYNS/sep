@@ -19,6 +19,7 @@ const BasketList: FC<BasketListProps> = ({ product, onQrCodeButtonClick /*onEdit
   const customButtons: ListItemButton[] = [
     {
       id: 'qr-code',
+      label: 'Voir le QRcode',
       iosIcon: qrCodeOutline,
       mdIcon: qrCodeSharp,
       onClick: () => onQrCodeButtonClick(product),

@@ -1,4 +1,4 @@
-import { IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonSkeletonText, IonToggle } from '@ionic/react';
+import { IonButton, IonItem, IonSelect, IonSelectOption, IonSkeletonText, IonToggle } from '@ionic/react';
 import Page from '@/components/Page';
 import environment from '@/environment';
 import { useEffect, useState, FC } from 'react';

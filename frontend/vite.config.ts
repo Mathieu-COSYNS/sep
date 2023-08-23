@@ -1,4 +1,5 @@
-import { defineConfig, loadEnv } from 'vite';
+import { loadEnv } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
 import react from '@vitejs/plugin-react';
@@ -48,6 +49,11 @@ export default defineConfig(({ mode }) => {
         // for TypeScript path alias import like : @/x/y/z
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
+      mainFields: ['module'],
+    },
+    test: {
+      globals: true,
+      environment: 'jsdom',
     },
   };
 });

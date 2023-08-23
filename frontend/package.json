@@ -11,14 +11,14 @@
     "start": "npm run dev",
     "dev": "VITE_APP_VERSION=$npm_package_version vite",
     "build": "npm run typecheck && VITE_APP_VERSION=$npm_package_version vite build",
-    "test": "echo \"No tests\" && exit 1",
+    "test": "vitest",
     "preview": "vite preview --port 3000",
     "format": "prettier . --write",
     "lint": "npm run eslint && npm run stylelint",
     "lint:fix": "npm run eslint -- --fix && npm run stylelint -- --fix",
     "eslint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "stylelint": "stylelint \"**/*.{css,scss}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc"
   },
   "browserslist": {
     "production": [
@@ -38,6 +38,7 @@
     "@ionic/react-router": "^7.3.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanem/react-nprogress": "^5.0.48",
+    "@types/lodash": "^4.14.197",
     "@types/node": "^18.17.8",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
@@ -73,6 +74,8 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.1",
+    "@testing-library/react": "^14.0.0",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.47.0",
@@ -83,9 +86,11 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^22.1.0",
     "prettier": "^3.0.2",
     "stylelint": "^15.10.3",
     "stylelint-config-sass-guidelines": "^10.0.0",
-    "stylelint-order": "^6.0.3"
+    "stylelint-order": "^6.0.3",
+    "vitest": "^0.34.2"
   }
 }

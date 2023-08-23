@@ -19,6 +19,7 @@ const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick /*onEditButtonC
   const customButtons: ListItemButton[] = [
     {
       id: 'qr-code',
+      label: 'Voir le QRcode',
       iosIcon: qrCodeOutline,
       mdIcon: qrCodeSharp,
       onClick: () => onQrCodeButtonClick(pack),
