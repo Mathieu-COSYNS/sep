@@ -34,13 +34,6 @@ const Stock: FC = () => {
 
   return (
     <Page title="Stock">
-      {/* <IonItem>
-        <IonLabel>Trier par</IonLabel>
-        <IonSelect interface="popover" placeholder="Select One" onIonChange={(e) => console.log(e.detail.value)}>
-          <IonSelectOption value="female">Female</IonSelectOption>
-          <IonSelectOption value="male">Male</IonSelectOption>
-        </IonSelect>
-      </IonItem> */}
       <StateAwareList
         state={{ isLoading: products.isLoading, items: products.data, error: products.error }}
         renderItem={(product) => (
@@ -51,14 +44,6 @@ const Stock: FC = () => {
           />
         )}
         keyResolver={(product) => `${product.id}`}
-        toolbarButtons={
-          [
-            // <IonButton key="1" fill="clear" shape="round">
-            //   <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
-            //   Nouveau produit
-            // </IonButton>,
-          ]
-        }
         loadingComponent={<StockLoading />}
         emptyComponent={'Aucun Produit'}
         renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}

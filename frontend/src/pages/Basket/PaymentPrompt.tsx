@@ -41,13 +41,15 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
       subHeader={
         !paymentMethods.isLoading && paymentMethods.data ? 'Indiquez comment le client vous a payé' : 'Chargement...'
       }
-      inputs={paymentMethods.data?.map((paymentMethod) => ({
-        name: 'paymentMethod',
-        type: 'radio',
-        label: paymentMethod.name,
-        value: paymentMethod.id,
-        checked: basket.data?.editable.payment_method?.id === paymentMethod.id,
-      }))}
+      inputs={
+        paymentMethods.data?.map((paymentMethod) => ({
+          name: 'paymentMethod',
+          type: 'radio',
+          label: paymentMethod.name,
+          value: paymentMethod.id,
+          checked: basket.data?.editable.payment_method?.id === paymentMethod.id,
+        })) ?? []
+      }
       buttons={[
         {
           text: 'Annuler',
