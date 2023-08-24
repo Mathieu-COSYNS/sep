@@ -1,3 +1,4 @@
+import path from 'path';
 import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -6,7 +7,6 @@ import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
 import { VitePWA } from 'vite-plugin-pwa';
 import transformManifest from './transform-manifest';
-import { fileURLToPath } from 'url';
 import config from './app.config.json';
 
 export default defineConfig(({ mode }) => {
@@ -46,8 +46,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        // for TypeScript path alias import like : @/x/y/z
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '~': path.resolve(__dirname, './src'),
       },
       mainFields: ['module'],
     },

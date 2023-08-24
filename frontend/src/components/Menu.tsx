@@ -28,9 +28,9 @@ import {
 } from 'ionicons/icons';
 import classes from './Menu.module.scss';
 import { Fragment, FC } from 'react';
-import { useUser } from '@/redux/userSlice';
+import { useUser } from '~/redux/userSlice';
 import Version from './Version';
-import environment from '@/environment';
+import environment from '~/environment';
 
 interface MenuEntry {
   url: string;

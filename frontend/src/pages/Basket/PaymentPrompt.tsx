@@ -1,8 +1,8 @@
 import { IonAlert } from '@ionic/react';
 import { useEffect, FC, useState } from 'react';
-import { setPaymentMethod, useBasket } from '@/redux/basketSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import { usePaymentMethods } from '@/redux/paymentMethodSlice';
+import { setPaymentMethod, useBasket } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { usePaymentMethods } from '~/redux/paymentMethodSlice';
 
 export interface PaymentPromptProps {
   open: boolean;

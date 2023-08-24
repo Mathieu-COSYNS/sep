@@ -14,8 +14,8 @@ import {
 import { logOutOutline, logOutSharp, logInOutline, logInSharp } from 'ionicons/icons';
 import { ReactNode, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '@/redux/hooks';
-import { logout, useUser } from '@/redux/userSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { logout, useUser } from '~/redux/userSlice';
 import classes from './Page.module.scss';
 
 export interface PageProps {

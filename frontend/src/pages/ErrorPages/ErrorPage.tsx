@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { arrowBackOutline } from 'ionicons/icons';
-import Page from '@/components/Page';
+import Page from '~/components/Page';
 import classes from './ErrorPage.module.scss';
 
 export interface ErrorPageProps {

@@ -1,15 +1,15 @@
 import { IonAlert, IonButton, NavContext, useIonRouter } from '@ionic/react';
-import Page from '@/components/Page';
-import ScannerBox from '@/components/ScannerBox';
-import environment from '@/environment';
+import Page from '~/components/Page';
+import ScannerBox from '~/components/ScannerBox';
+import environment from '~/environment';
 import { useContext, useEffect, useState, FC } from 'react';
 import { useToast } from '@agney/ir-toast';
 import classes from './Scanner.module.scss';
-import { useAppDispatch } from '@/redux/hooks';
-import { addOneProductById, addProductsByPackId, initializeNewSale, useBasket } from '@/redux/basketSlice';
-import { reverseMapping } from '@/utils/collections';
-import { typesMap } from '@/types/typesMap';
-import { Base58 } from '@/utils/base58';
+import { useAppDispatch } from '~/redux/hooks';
+import { addOneProductById, addProductsByPackId, initializeNewSale, useBasket } from '~/redux/basketSlice';
+import { reverseMapping } from '~/utils/collections';
+import { typesMap } from '~/types/typesMap';
+import { Base58 } from '~/utils/base58';
 import { has } from 'lodash';
 
 const base58 = new Base58();

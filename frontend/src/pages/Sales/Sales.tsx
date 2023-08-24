@@ -1,15 +1,15 @@
 import { IonButton, IonIcon, IonItem, useIonRouter } from '@ionic/react';
-import Page from '@/components/Page';
-import StateAwareList from '@/components/StateAwareList';
+import Page from '~/components/Page';
+import StateAwareList from '~/components/StateAwareList';
 import { addOutline, addSharp, downloadOutline, downloadSharp } from 'ionicons/icons';
 import { capitalize } from 'lodash';
 import { useEffect, FC } from 'react';
-import { initializeNewSale } from '@/redux/basketSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import { loadSales, useSales } from '@/redux/salesSlice';
+import { initializeNewSale } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { loadSales, useSales } from '~/redux/salesSlice';
 import SaleItem from './SaleItem';
 import SaleLoading from './SaleLoading';
-import { downloadSalesReport } from '@/api/saleAPI';
+import { downloadSalesReport } from '~/api/saleAPI';
 import shared_classes from '../shared.module.scss';
 
 const Sales: FC = () => {

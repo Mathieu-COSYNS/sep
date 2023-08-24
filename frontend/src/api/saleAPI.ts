@@ -1,7 +1,7 @@
-import environment from '@/environment';
-import { Id } from '@/types/Id';
-import { RequestStatusError } from '@/types/RequestStatusError';
-import { EditableSale, Sale } from '@/types/Sale';
+import environment from '~/environment';
+import { Id } from '~/types/Id';
+import { RequestStatusError } from '~/types/RequestStatusError';
+import { EditableSale, Sale } from '~/types/Sale';
 import { CRUDApi } from './_API';
 
 export const saleApi = new CRUDApi<Sale, EditableSale>('sales', (data: EditableSale) => {

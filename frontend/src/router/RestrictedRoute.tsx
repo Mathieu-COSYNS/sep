@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { LocationDescriptor } from 'history';
-import { Unauthorized } from '@/pages/ErrorPages';
-import { useUser } from '@/redux/userSlice';
+import { Unauthorized } from '~/pages/ErrorPages';
+import { useUser } from '~/redux/userSlice';
 
 export enum AccessLevel {
   ANONYM,

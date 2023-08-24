@@ -1,5 +1,5 @@
 import { IonNote, IonSpinner } from '@ionic/react';
-import EmptyPage from '@/components/EmptyPage';
+import EmptyPage from '~/components/EmptyPage';
 import { FC } from 'react';
 import classes from './WaitingServerConnection.module.scss';
 

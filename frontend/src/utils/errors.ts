@@ -1,4 +1,4 @@
-import { isRequestStatusError } from '@/types/RequestStatusError';
+import { isRequestStatusError } from '~/types/RequestStatusError';
 
 export const serializeError = (e: unknown): string => {
   if (isRequestStatusError(e)) {

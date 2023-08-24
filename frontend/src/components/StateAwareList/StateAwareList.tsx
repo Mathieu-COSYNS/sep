@@ -1,7 +1,7 @@
 import { IonButton, IonButtons, IonIcon, IonList, IonToolbar } from '@ionic/react';
-import LoadingBar from '@/components/LoadingBar';
-import Refresher from '@/components/Refresher';
-import useBreakpoints from '@/hooks/useBreakpoints';
+import LoadingBar from '~/components/LoadingBar';
+import Refresher from '~/components/Refresher';
+import useBreakpoints from '~/hooks/useBreakpoints';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
 import { ReactElement, ReactNode, useMemo, useState } from 'react';

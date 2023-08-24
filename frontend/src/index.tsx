@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from '@/components/App';
+import App from '~/components/App';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
-import { PWAContextProvider } from '@/contexts/PWAContext';
+import { store } from '~/redux/store';
+import { PWAContextProvider } from '~/contexts/PWAContext';
 
 const container = document.getElementById('root');
 if (container) {

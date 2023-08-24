@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User, UserWithToken } from '@/types/User';
+import { User, UserWithToken } from '~/types/User';
 import { AsyncState } from '../types/AsyncState';
-import { fetchCurrentUser } from '@/api/userAPI';
+import { fetchCurrentUser } from '~/api/userAPI';
 import { useAppSelector } from './hooks';
 import { RootState } from './store';
 import { addAsyncThunk } from './utils';

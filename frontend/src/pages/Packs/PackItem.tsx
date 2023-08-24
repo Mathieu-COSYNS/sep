@@ -1,10 +1,10 @@
 import { IonBadge, IonCard, IonCardHeader, IonCardTitle } from '@ionic/react';
-import Accordions from '@/components/Accordions';
-import ListItem, { ListItemButton } from '@/components/ListItem';
+import Accordions from '~/components/Accordions';
+import ListItem, { ListItemButton } from '~/components/ListItem';
 import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { FC } from 'react';
-import { Pack } from '@/types/Pack';
-import { Base58 } from '@/utils/base58';
+import { Pack } from '~/types/Pack';
+import { Base58 } from '~/utils/base58';
 import classes from '../Stock/Stock.module.scss';
 
 const base58 = new Base58();

@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Product } from '@/types/Product';
+import { Product } from '~/types/Product';
 import { AsyncState } from '../types/AsyncState';
 import { RootState } from './store';
 import { addAsyncThunk } from './utils';
-import { productApi } from '@/api/productAPI';
+import { productApi } from '~/api/productAPI';
 import { useAppSelector } from './hooks';
-import { Id } from '@/types/Id';
-import { Pack } from '@/types/Pack';
-import { packApi } from '@/api/packAPI';
+import { Id } from '~/types/Id';
+import { Pack } from '~/types/Pack';
+import { packApi } from '~/api/packAPI';
 
 type QrCodeData = { type: 'product' | 'pack'; value: Product | Pack };
 

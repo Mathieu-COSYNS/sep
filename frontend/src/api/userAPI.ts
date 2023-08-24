@@ -1,6 +1,6 @@
-import environment from '@/environment';
-import { RequestStatusError } from '@/types/RequestStatusError';
-import { User, UserWithToken } from '@/types/User';
+import environment from '~/environment';
+import { RequestStatusError } from '~/types/RequestStatusError';
+import { User, UserWithToken } from '~/types/User';
 
 export const loginUser = async (username: string, password: string): Promise<UserWithToken> => {
   const resp = await fetch(`${environment.API_URL}/login/`, {

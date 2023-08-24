@@ -1,6 +1,6 @@
 import { useToast } from '@agney/ir-toast';
 import { ToastButton } from '@ionic/react';
-import environment from '@/environment';
+import environment from '~/environment';
 import { closeOutline, closeSharp } from 'ionicons/icons';
 import { FC } from 'react';
 import classes from './Version.module.scss';
