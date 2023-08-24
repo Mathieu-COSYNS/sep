@@ -5,14 +5,6 @@ import { CSSTransition } from 'react-transition-group';
 
 import LoadingBar from '~/components/LoadingBar';
 import WaitingServerConnection from '~/pages/WaitingServerConnection';
-import {
-  addOfflineBanner,
-  addUpdateAvailableBanner,
-  getBannerColor,
-  removeOfflineBanner,
-  removeUpdateAvailableBanner,
-  useBanner,
-} from '~/redux/bannerSlice';
 import { useAppDispatch } from '~/redux/hooks';
 import { loadUser, useUser } from '~/redux/userSlice';
 import Router from '~/router/Router';
@@ -22,6 +14,7 @@ import '~/theme/index.scss';
 import Info from '~/components/Info';
 import { usePWAContext } from '~/contexts/PWAContext';
 import useNetwork from '~/hooks/useNetwork';
+import { useBannerStore } from '~/store/bannerStore';
 import classes from './App.module.scss';
 
 setupIonicReact();
@@ -30,7 +23,9 @@ const App: React.FC = () => {
   const { showUpdateAvailable } = usePWAContext();
   const asyncUser = useUser();
   const dispatch = useAppDispatch();
-  const banner = useBanner();
+  const { getBanner, addOfflineBanner, addUpdateAvailableBanner, removeOfflineBanner, removeUpdateAvailableBanner } =
+    useBannerStore();
+  const banner = getBanner();
   const network = useNetwork();
   const nodeRef = useRef();
 
@@ -40,37 +35,35 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (network.offline) {
-      dispatch(addOfflineBanner());
+      addOfflineBanner();
     } else {
-      dispatch(removeOfflineBanner());
+      removeOfflineBanner();
     }
   }, [dispatch, network.offline]);
 
   useEffect(() => {
     if (showUpdateAvailable) {
-      dispatch(addUpdateAvailableBanner());
+      addUpdateAvailableBanner();
     } else {
-      dispatch(removeUpdateAvailableBanner());
+      removeUpdateAvailableBanner();
     }
   }, [dispatch, showUpdateAvailable]);
 
   return (
     <>
       <LoadingBar show={asyncUser.isLoading} />
-      <CSSTransition nodeRef={nodeRef} mountOnEnter={true} unmountOnExit={true} in={banner.length > 0} timeout={200}>
+      <CSSTransition nodeRef={nodeRef} mountOnEnter={true} unmountOnExit={true} in={!!banner} timeout={200}>
         <div
           className={classes.banner}
-          title={banner.length > 0 ? banner[0].explanation : undefined}
+          title={banner?.explanation}
           style={{
-            background: `var(${getBannerColor(banner)})`,
+            backgroundColor: banner?.backgroundColor,
           }}
         >
-          <Info infos={banner.length > 0 ? banner[0].explanation : undefined}>
-            {banner.length > 0 ? banner.length > 0 && banner[0].message : undefined}
-          </Info>
+          <Info infos={banner?.explanation}>{banner?.message}</Info>
         </div>
       </CSSTransition>
-      <IonApp className={classes.ion_app} style={{ top: banner.length > 0 ? '1.5rem' : '0' }}>
+      <IonApp className={classes.ion_app} style={{ top: banner ? '1.5rem' : '0' }}>
         <ToastProvider value={{ duration: 2000 }}>
           {asyncUser.isLoading ? <WaitingServerConnection /> : <Router />}
         </ToastProvider>

@@ -1,6 +1,5 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
-import bannerReducer from './bannerSlice';
 import basketReducer from './basketSlice';
 import entriesReducer from './entriesSlice';
 import packsReducer from './packsSlice';
@@ -12,7 +11,6 @@ import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
-    banner: bannerReducer,
     basket: basketReducer,
     user: userReducer,
     entries: entriesReducer,
