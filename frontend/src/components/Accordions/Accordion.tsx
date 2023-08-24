@@ -1,6 +1,7 @@
+import { FC, ReactNode } from 'react';
 import { IonIcon } from '@ionic/react';
 import { chevronForwardOutline, chevronForwardSharp } from 'ionicons/icons';
-import { FC, ReactNode } from 'react';
+
 import classes from './Accordion.module.scss';
 
 const Accordion: FC<{ title: string; expand: boolean; children: ReactNode; onClick: () => void }> = ({
@@ -13,7 +14,7 @@ const Accordion: FC<{ title: string; expand: boolean; children: ReactNode; onCli
     <>
       <dt className={`${classes.title}${expand ? ` ${classes.is_expanded}` : ''}`} onClick={onClick}>
         <span>{title}</span>
-        <IonIcon md={chevronForwardOutline} ios={chevronForwardSharp} />
+        <IonIcon md={chevronForwardOutline} ios={chevronForwardSharp} aria-label={expand ? 'Réduire' : 'Développer'} />
       </dt>
       <dd className={`${classes.content}${expand ? ` ${classes.is_expanded}` : ''}`} onClick={onClick}>
         {children}

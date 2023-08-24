@@ -1,13 +1,14 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+
 import bannerReducer from './bannerSlice';
-import entriesReducer from './entriesSlice';
-import productsReducer from './productsSlice';
-import packsReducer from './packsSlice';
-import salesReducer from './salesSlice';
 import basketReducer from './basketSlice';
-import userReducer from './userSlice';
-import qrCodeReducer from './qrCodeSlice';
+import entriesReducer from './entriesSlice';
+import packsReducer from './packsSlice';
 import paymentMethodReducer from './paymentMethodSlice';
+import productsReducer from './productsSlice';
+import qrCodeReducer from './qrCodeSlice';
+import salesReducer from './salesSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,5 +1,6 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
 import { FC } from 'react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
+
 import classes from './Entries.module.scss';
 
 const EntryLoading: FC = () => {

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import classes from './RequiredAsterisk.module.scss';
 
 const RequiredAsterisk: FC = () => {

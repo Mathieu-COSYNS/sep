@@ -1,11 +1,10 @@
-@use 'theme/breakpoints';
+@use '~/theme/breakpoints';
+@use '~/theme/sr-only';
 
 .logout {
   span {
-    display: none;
-
-    @include breakpoints.mq(sm) {
-      display: inline;
+    @include breakpoints.mq(xs, sm) {
+      @include sr-only.fn();
     }
   }
 }

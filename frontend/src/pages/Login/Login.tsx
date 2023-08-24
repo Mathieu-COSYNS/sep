@@ -1,25 +1,26 @@
-import Page from 'components/Page';
-import { useState, FC } from 'react';
+import { FC, useState } from 'react';
+import { IonInput, IonItem, IonNote, IonSpinner, useIonRouter } from '@ionic/react';
 import { useFormik } from 'formik';
-import { IonInput, IonItem, IonLabel, IonNote, IonSpinner, useIonRouter } from '@ionic/react';
+import { object, string } from 'yup';
+
+import { serializeError } from '~/utils/errors';
+import { loginUser } from '~/api/userAPI';
+import FormSubmitButton from '~/components/FormSubmitButton';
+import Message from '~/components/Message';
+import Page from '~/components/Page';
+import RequiredAsterisk from '~/components/RequiredAsterisk';
+import { useAppDispatch } from '~/redux/hooks';
+import { login } from '~/redux/userSlice';
 import classes from './Login.module.scss';
-import * as yup from 'yup';
-import { loginUser } from 'api/userAPI';
-import FormSubmitButton from 'components/FormSubmitButton';
-import Message from 'components/Message';
-import { useAppDispatch } from 'redux/hooks';
-import { login } from 'redux/userSlice';
-import RequiredAsterisk from 'components/RequiredAsterisk';
-import { serializeError } from 'utils/errors';
 
 interface LoginFormValues {
   username: string;
   password: string;
 }
 
-const validationSchema = yup.object({
-  username: yup.string().required('Le nom est requis'),
-  password: yup.string().required('Mot de passe requis'),
+const validationSchema = object({
+  username: string().required('Le nom est requis'),
+  password: string().required('Mot de passe requis'),
 });
 
 const Login: FC = () => {
@@ -55,33 +56,39 @@ const Login: FC = () => {
           </Message>
         )}
         <IonItem>
-          <IonLabel position="stacked">
-            Nom
-            <RequiredAsterisk />
-          </IonLabel>
           <IonInput
             type="text"
             name="username"
+            labelPlacement="stacked"
             value={formik.values.username}
             onIonChange={formik.handleChange}
             disabled={formik.isSubmitting}
-          />
+          >
+            <div slot="label">
+              {/* TODO: ionic label slot still experimental ? */}
+              Nom
+              <RequiredAsterisk />
+            </div>
+          </IonInput>
         </IonItem>
         {formik.touched.username && Boolean(formik.errors.username) && (
           <IonNote color="danger">{formik.touched.username && formik.errors.username}</IonNote>
         )}
         <IonItem>
-          <IonLabel position="stacked">
-            Mot de passe
-            <RequiredAsterisk />
-          </IonLabel>
           <IonInput
             type="password"
             name="password"
+            labelPlacement="stacked"
             value={formik.values.password}
             onIonChange={formik.handleChange}
             disabled={formik.isSubmitting}
-          />
+          >
+            <div slot="label">
+              {/* TODO: ionic label slot still experimental */}
+              Mot de passe
+              <RequiredAsterisk />
+            </div>
+          </IonInput>
         </IonItem>
         {formik.touched.password && Boolean(formik.errors.password) && (
           <IonNote color="danger">{formik.touched.password && formik.errors.password}</IonNote>

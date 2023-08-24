@@ -1,10 +1,11 @@
-import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
-import ListItem, { ListItemButton } from 'components/ListItem';
-import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { FC } from 'react';
-import { Product } from 'types/Product';
-import { Base58 } from 'utils/base58';
-import { removeDecimalZeros } from 'utils/math';
+import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
+import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
+
+import { Base58 } from '~/utils/base58';
+import { removeDecimalZeros } from '~/utils/math';
+import ListItem, { ListItemButton } from '~/components/ListItem';
+import { Product } from '~/types/Product';
 import classes from './Stock.module.scss';
 
 const base58 = new Base58();
@@ -19,6 +20,7 @@ const BasketList: FC<BasketListProps> = ({ product, onQrCodeButtonClick /*onEdit
   const customButtons: ListItemButton[] = [
     {
       id: 'qr-code',
+      label: 'Voir le QRcode',
       iosIcon: qrCodeOutline,
       mdIcon: qrCodeSharp,
       onClick: () => onQrCodeButtonClick(product),

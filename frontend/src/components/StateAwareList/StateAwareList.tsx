@@ -1,11 +1,12 @@
+import { ReactElement, ReactNode, useMemo, useState } from 'react';
 import { IonButton, IonButtons, IonIcon, IonList, IonToolbar } from '@ionic/react';
-import LoadingBar from 'components/LoadingBar';
-import Refresher from 'components/Refresher';
-import useBreakpoints from 'hooks/useBreakpoints';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
-import { ReactElement, ReactNode, useMemo, useState } from 'react';
 import { GroupedVirtuoso, Virtuoso } from 'react-virtuoso';
+
+import LoadingBar from '~/components/LoadingBar';
+import Refresher from '~/components/Refresher';
+import useBreakpoints from '~/hooks/useBreakpoints';
 import Empty from './Empty';
 import classes from './StateAwareList.module.scss';
 
@@ -100,7 +101,7 @@ const StateAwareList = <Item,>({
     toolbarButtons = [
       ...(toolbarButtons || []),
       <IonButton key="refresher" fill="clear" shape="round" onClick={onRefresh}>
-        <IonIcon slot="start" ios={refreshOutline} md={refreshSharp} />
+        <IonIcon slot="start" ios={refreshOutline} md={refreshSharp} aria-hidden />
         Mettre à jour
       </IonButton>,
     ];

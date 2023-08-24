@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>%REACT_APP_NAME%</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <title><%= title %></title>
 
     <base href="/" />
 
@@ -19,9 +20,12 @@
         background-color: #121212;
       }
     </style>
+
+    <%- injectInHead %>
   </head>
 
   <body>
     <div id="root"></div>
+    <script type="module" src="./src/index.tsx"></script>
   </body>
 </html>

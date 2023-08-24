@@ -1,9 +1,9 @@
+import { paymentMethodAPI } from '~/api/paymentMethodAPI';
+import { PaymentMethod } from '~/types/PaymentMethod';
 import { AsyncState } from '../types/AsyncState';
-import { RootState } from './store';
 import { useAppSelector } from './hooks';
-import { PaymentMethod } from 'types/PaymentMethod';
-import { paymentMethodAPI } from 'api/paymentMethodAPI';
 import { createRestSlice } from './rest';
+import { RootState } from './store';
 
 export const { slice, extraReducers } = createRestSlice({
   name: 'paymentMethods',

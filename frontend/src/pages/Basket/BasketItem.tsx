@@ -1,7 +1,8 @@
-import ListItem from 'components/ListItem';
 import { FC } from 'react';
-import { EditableSaleItem } from 'types/SaleItem';
-import { removeDecimalZeros } from 'utils/math';
+
+import { removeDecimalZeros } from '~/utils/math';
+import ListItem from '~/components/ListItem';
+import { EditableSaleItem } from '~/types/SaleItem';
 import classes from './Basket.module.scss';
 
 export interface BasketListProps {

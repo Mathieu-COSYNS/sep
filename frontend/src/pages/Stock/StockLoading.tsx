@@ -1,5 +1,6 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
 import { FC } from 'react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
+
 import classes from './Stock.module.scss';
 
 const BasketLoading: FC = () => {

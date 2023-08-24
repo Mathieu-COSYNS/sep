@@ -1,8 +1,9 @@
-import { AlertButton, IonAlert } from '@ionic/react';
 import { FC } from 'react';
-import { removeOneProductById, removeItemByProductId } from 'redux/basketSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { EditableSaleItem } from 'types/SaleItem';
+import { AlertButton, IonAlert } from '@ionic/react';
+
+import { removeItemByProductId, removeOneProductById } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { EditableSaleItem } from '~/types/SaleItem';
 
 export interface BasketRemoveItemProps {
   saleItem?: EditableSaleItem;
@@ -40,7 +41,7 @@ const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss })
       {
         text: 'Annuler',
         role: 'cancel',
-      }
+      },
     );
   }
 

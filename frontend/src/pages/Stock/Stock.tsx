@@ -1,11 +1,12 @@
+import { FC, useEffect } from 'react';
 import { IonItem, useIonRouter } from '@ionic/react';
-import Page from 'components/Page';
-import StateAwareList from 'components/StateAwareList';
-import { useEffect, FC } from 'react';
-import { useAppDispatch } from 'redux/hooks';
-import { loadProducts, useProducts } from 'redux/productsSlice';
-import { Product } from 'types/Product';
-import { Base58 } from 'utils/base58';
+
+import { Base58 } from '~/utils/base58';
+import Page from '~/components/Page';
+import StateAwareList from '~/components/StateAwareList';
+import { useAppDispatch } from '~/redux/hooks';
+import { loadProducts, useProducts } from '~/redux/productsSlice';
+import { Product } from '~/types/Product';
 import StockItem from './StockItem';
 import StockLoading from './StockLoading';
 
@@ -34,13 +35,6 @@ const Stock: FC = () => {
 
   return (
     <Page title="Stock">
-      {/* <IonItem>
-        <IonLabel>Trier par</IonLabel>
-        <IonSelect interface="popover" placeholder="Select One" onIonChange={(e) => console.log(e.detail.value)}>
-          <IonSelectOption value="female">Female</IonSelectOption>
-          <IonSelectOption value="male">Male</IonSelectOption>
-        </IonSelect>
-      </IonItem> */}
       <StateAwareList
         state={{ isLoading: products.isLoading, items: products.data, error: products.error }}
         renderItem={(product) => (
@@ -51,14 +45,6 @@ const Stock: FC = () => {
           />
         )}
         keyResolver={(product) => `${product.id}`}
-        toolbarButtons={
-          [
-            // <IonButton key="1" fill="clear" shape="round">
-            //   <IonIcon slot="start" ios={addOutline} md={addSharp} />
-            //   Nouveau produit
-            // </IonButton>,
-          ]
-        }
         loadingComponent={<StockLoading />}
         emptyComponent={'Aucun Produit'}
         renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}

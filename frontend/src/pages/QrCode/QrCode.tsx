@@ -1,13 +1,14 @@
-import { IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonSkeletonText, IonToggle } from '@ionic/react';
-import Page from 'components/Page';
-import environment from 'environment';
-import { useEffect, useState, FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { IonButton, IonItem, IonSelect, IonSelectOption, IonSkeletonText, IonToggle } from '@ionic/react';
 import QRCodeGenerator from 'react-qr-code';
 import { useParams } from 'react-router';
-import { useAppDispatch } from 'redux/hooks';
-import { loadQrCode, useQrCode } from 'redux/qrCodeSlice';
-import { typesMap, TypesMapKeys } from 'types/typesMap';
-import { Base58 } from 'utils/base58';
+
+import { Base58 } from '~/utils/base58';
+import Page from '~/components/Page';
+import environment from '~/environment';
+import { useAppDispatch } from '~/redux/hooks';
+import { loadQrCode, useQrCode } from '~/redux/qrCodeSlice';
+import { typesMap, TypesMapKeys } from '~/types/typesMap';
 import classes from './QrCode.module.scss';
 
 const base58 = new Base58();
@@ -74,8 +75,13 @@ const QrCode: FC = () => {
     <Page title="Qr Code" backButton={true} defaultBackUrl={slug === 'pack' ? '/packs/' : '/stock/'} backText={'Stock'}>
       <div className={classes.qr_code_page}>
         <IonItem>
-          <IonLabel>Taille</IonLabel>
-          <IonSelect interface="popover" placeholder={'Size'} value={`${size}`} onIonChange={handleSizeChange}>
+          <IonSelect
+            label="Taille"
+            interface="popover"
+            placeholder={'Size'}
+            value={`${size}`}
+            onIonChange={handleSizeChange}
+          >
             <IonSelectOption value="128">x128</IonSelectOption>
             <IonSelectOption value="256">x256</IonSelectOption>
             <IonSelectOption value="512">x512</IonSelectOption>
@@ -84,8 +90,9 @@ const QrCode: FC = () => {
           </IonSelect>
         </IonItem>
         <IonItem>
-          <IonLabel>Fond blanc</IonLabel>
-          <IonToggle checked={background} onIonChange={handleBackgroundChange} />
+          <IonToggle checked={background} onIonChange={handleBackgroundChange}>
+            Fond blanc
+          </IonToggle>
         </IonItem>
         <div className={classes.content}>
           <h2 style={{ color: !qrCode.isLoading && qrCode.error ? 'var(--ion-color-danger, #f00)' : undefined }}>

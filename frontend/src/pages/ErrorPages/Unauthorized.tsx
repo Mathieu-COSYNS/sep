@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import ErrorPage from './ErrorPage';
 
 const UnauthorizedPage: FC = () => {

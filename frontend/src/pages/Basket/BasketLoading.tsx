@@ -1,5 +1,5 @@
-import { IonItem, IonLabel, IonSkeletonText } from '@ionic/react';
 import { FC } from 'react';
+import { IonItem, IonLabel, IonSkeletonText } from '@ionic/react';
 
 const BasketLoading: FC = () => {
   return (

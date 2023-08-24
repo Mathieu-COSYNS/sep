@@ -1,10 +1,11 @@
-import { IonBadge, IonCard, IonCardHeader, IonCardTitle } from '@ionic/react';
-import Accordions from 'components/Accordions';
-import ListItem, { ListItemButton } from 'components/ListItem';
-import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { FC } from 'react';
-import { Pack } from 'types/Pack';
-import { Base58 } from 'utils/base58';
+import { IonBadge, IonCard, IonCardHeader, IonCardTitle } from '@ionic/react';
+import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
+
+import { Base58 } from '~/utils/base58';
+import Accordions from '~/components/Accordions';
+import ListItem, { ListItemButton } from '~/components/ListItem';
+import { Pack } from '~/types/Pack';
 import classes from '../Stock/Stock.module.scss';
 
 const base58 = new Base58();
@@ -19,6 +20,7 @@ const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick /*onEditButtonC
   const customButtons: ListItemButton[] = [
     {
       id: 'qr-code',
+      label: 'Voir le QRcode',
       iosIcon: qrCodeOutline,
       mdIcon: qrCodeSharp,
       onClick: () => onQrCodeButtonClick(pack),

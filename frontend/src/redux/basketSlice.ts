@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { packApi } from 'api/packAPI';
-import { productApi } from 'api/productAPI';
-import { saleApi } from 'api/saleAPI';
 import { isEqual } from 'lodash';
-import { Id } from 'types/Id';
-import { Pack } from 'types/Pack';
-import { PaymentMethod } from 'types/PaymentMethod';
-import { Product } from 'types/Product';
-import { EditableSale, Sale } from 'types/Sale';
-import { SaleItem } from 'types/SaleItem';
+
+import { packApi } from '~/api/packAPI';
+import { productApi } from '~/api/productAPI';
+import { saleApi } from '~/api/saleAPI';
+import { Id } from '~/types/Id';
+import { Pack } from '~/types/Pack';
+import { PaymentMethod } from '~/types/PaymentMethod';
+import { Product } from '~/types/Product';
+import { EditableSale, Sale } from '~/types/Sale';
+import { SaleItem } from '~/types/SaleItem';
 import { AsyncState } from '../types/AsyncState';
 import { useAppSelector } from './hooks';
 import { saveSale } from './salesSlice';
@@ -33,7 +34,7 @@ export const loadSaleIntoBasket = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(e);
     }
-  }
+  },
 );
 
 export const addOneProductById = createAsyncThunk(
@@ -54,7 +55,7 @@ export const addOneProductById = createAsyncThunk(
       }
     },
     dispatchConditionRejection: true,
-  }
+  },
 );
 
 export const addProductsByPackId = createAsyncThunk(
@@ -75,7 +76,7 @@ export const addProductsByPackId = createAsyncThunk(
       }
     },
     dispatchConditionRejection: true,
-  }
+  },
 );
 
 export const saveBasket = createAsyncThunk(
@@ -95,7 +96,7 @@ export const saveBasket = createAsyncThunk(
       return isBasketDirty(state.basket);
     },
     dispatchConditionRejection: true,
-  }
+  },
 );
 
 const updateTotal = (sale: EditableSale) => {
@@ -105,7 +106,7 @@ const updateTotal = (sale: EditableSale) => {
 const updateItemsToAddProduct = (sale: EditableSale, product: Product) => {
   if (sale.items.find((item) => item.product.id == product.id)) {
     sale.items = sale.items.map((item) =>
-      item.product.id === product.id ? { product, quantity: item.quantity + 1 } : item
+      item.product.id === product.id ? { product, quantity: item.quantity + 1 } : item,
     );
   } else {
     sale.items.push({ product, quantity: 1 });
@@ -142,7 +143,7 @@ export const basketSlice = createSlice({
       }
       state.data.editable.items = state.data.editable.items
         .map((item) =>
-          item.product.id === action.payload.productId ? { ...item, quantity: action.payload.quantity } : item
+          item.product.id === action.payload.productId ? { ...item, quantity: action.payload.quantity } : item,
         )
         .filter((item) => item.quantity > 0);
       updateTotal(state.data.editable);

@@ -1,16 +1,17 @@
+import { FC, useEffect } from 'react';
 import { IonButton, IonIcon, IonItem, useIonRouter } from '@ionic/react';
-import Page from 'components/Page';
-import StateAwareList from 'components/StateAwareList';
 import { addOutline, addSharp, downloadOutline, downloadSharp } from 'ionicons/icons';
 import { capitalize } from 'lodash';
-import { useEffect, FC } from 'react';
-import { initializeNewSale } from 'redux/basketSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { loadSales, useSales } from 'redux/salesSlice';
+
+import { downloadSalesReport } from '~/api/saleAPI';
+import Page from '~/components/Page';
+import StateAwareList from '~/components/StateAwareList';
+import { initializeNewSale } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { loadSales, useSales } from '~/redux/salesSlice';
+import shared_classes from '../shared.module.scss';
 import SaleItem from './SaleItem';
 import SaleLoading from './SaleLoading';
-import { downloadSalesReport } from 'api/saleAPI';
-import shared_classes from '../shared.module.scss';
 
 const Sales: FC = () => {
   const sales = useSales();
@@ -40,11 +41,11 @@ const Sales: FC = () => {
         state={{ isLoading: sales.isLoading, items: sales.data, error: sales.error }}
         toolbarButtons={[
           <IonButton key="1" fill="clear" shape="round" onClick={handleAddButtonClick}>
-            <IonIcon slot="start" ios={addOutline} md={addSharp} />
+            <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
             Nouvelle vente
           </IonButton>,
           <IonButton key="2" fill="clear" shape="round" onClick={handleDownloadReportButtonClick}>
-            <IonIcon slot="start" ios={downloadOutline} md={downloadSharp} />
+            <IonIcon slot="start" ios={downloadOutline} md={downloadSharp} aria-hidden />
             Télécharger
           </IonButton>,
         ]}
@@ -60,7 +61,7 @@ const Sales: FC = () => {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
-            })
+            }),
           )
         }
         renderGroup={(group, items) => (

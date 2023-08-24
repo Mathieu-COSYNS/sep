@@ -1,9 +1,9 @@
+import { saleApi } from '~/api/saleAPI';
+import { Sale } from '~/types/Sale';
 import { AsyncState } from '../types/AsyncState';
-import { RootState } from './store';
 import { useAppSelector } from './hooks';
-import { saleApi } from 'api/saleAPI';
-import { Sale } from 'types/Sale';
 import { createRestSlice } from './rest';
+import { RootState } from './store';
 
 export const { slice, extraReducers } = createRestSlice({
   name: 'sales',

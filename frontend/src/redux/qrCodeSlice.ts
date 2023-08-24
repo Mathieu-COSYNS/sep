@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Product } from 'types/Product';
+
+import { packApi } from '~/api/packAPI';
+import { productApi } from '~/api/productAPI';
+import { Id } from '~/types/Id';
+import { Pack } from '~/types/Pack';
+import { Product } from '~/types/Product';
 import { AsyncState } from '../types/AsyncState';
+import { useAppSelector } from './hooks';
 import { RootState } from './store';
 import { addAsyncThunk } from './utils';
-import { productApi } from 'api/productAPI';
-import { useAppSelector } from './hooks';
-import { Id } from 'types/Id';
-import { Pack } from 'types/Pack';
-import { packApi } from 'api/packAPI';
 
 type QrCodeData = { type: 'product' | 'pack'; value: Product | Pack };
 
@@ -33,7 +34,7 @@ export const loadQrCode = createAsyncThunk(
     } catch (e) {
       return rejectWithValue(JSON.stringify(e));
     }
-  }
+  },
 );
 
 export const qrCodeSlice = createSlice({

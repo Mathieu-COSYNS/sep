@@ -1,4 +1,5 @@
-import { ReactNode, useState, FC } from 'react';
+import { FC, ReactNode, useState } from 'react';
+
 import Accordion from './Accordion';
 import classes from './Accordion.module.scss';
 

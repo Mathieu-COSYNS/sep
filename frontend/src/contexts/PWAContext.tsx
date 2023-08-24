@@ -1,7 +1,8 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { createCtx } from './utils';
-import * as serviceWorkerRegistration from '../serviceWorkerRegistration';
 import { useHistory } from 'react-router';
+
+import * as serviceWorkerRegistration from '../serviceWorkerRegistration';
+import { createCtx } from './utils';
 
 interface PWAContext {
   showUpdateAvailable: boolean;

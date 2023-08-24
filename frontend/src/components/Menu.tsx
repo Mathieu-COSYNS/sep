@@ -1,3 +1,4 @@
+import { FC, Fragment } from 'react';
 import {
   IonContent,
   IonIcon,
@@ -9,28 +10,27 @@ import {
   IonMenuToggle,
   IonNote,
 } from '@ionic/react';
-
-import { useLocation } from 'react-router-dom';
 import {
-  fileTrayOutline,
-  fileTrayFullSharp,
   cartOutline,
   cartSharp,
-  cubeOutline,
-  cubeSharp,
   cogOutline,
   cogSharp,
-  logInSharp,
-  logInOutline,
+  cubeOutline,
+  cubeSharp,
+  fileTrayFullSharp,
+  fileTrayOutline,
   fileTrayStackedOutline,
   fileTrayStackedSharp,
+  logInOutline,
+  logInSharp,
   openOutline,
 } from 'ionicons/icons';
+import { useLocation } from 'react-router-dom';
+
+import environment from '~/environment';
+import { useUser } from '~/redux/userSlice';
 import classes from './Menu.module.scss';
-import { Fragment, FC } from 'react';
-import { useUser } from 'redux/userSlice';
 import Version from './Version';
-import environment from 'environment';
 
 interface MenuEntry {
   url: string;
@@ -129,9 +129,11 @@ const Menu: FC = () => {
                     lines="none"
                     detail={false}
                   >
-                    <IonIcon slot="start" ios={menuEntry.iosIcon} md={menuEntry.mdIcon} />
+                    <IonIcon slot="start" ios={menuEntry.iosIcon} md={menuEntry.mdIcon} aria-hidden />
                     <IonLabel>{menuEntry.title}</IonLabel>
-                    {menuEntry.external && <IonIcon slot="end" ios={openOutline} md={openOutline} />}
+                    {menuEntry.external && (
+                      <IonIcon slot="end" ios={openOutline} md={openOutline} aria-label="Lien externe" />
+                    )}
                   </IonItem>
                 </IonMenuToggle>
               </Fragment>

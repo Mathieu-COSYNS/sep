@@ -1,5 +1,5 @@
-import { IonContent, IonPage } from '@ionic/react';
 import { FC, ReactNode } from 'react';
+import { IonContent, IonPage } from '@ionic/react';
 
 const EmptyPage: FC<{ children: ReactNode }> = ({ children }) => {
   return (

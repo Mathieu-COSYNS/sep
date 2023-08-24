@@ -1,6 +1,6 @@
-import environment from 'environment';
-import { RequestStatusError } from 'types/RequestStatusError';
-import { User, UserWithToken } from 'types/User';
+import environment from '~/environment';
+import { RequestStatusError } from '~/types/RequestStatusError';
+import { User, UserWithToken } from '~/types/User';
 
 export const loginUser = async (username: string, password: string): Promise<UserWithToken> => {
   const resp = await fetch(`${environment.API_URL}/login/`, {
@@ -21,7 +21,7 @@ export const loginUser = async (username: string, password: string): Promise<Use
       throw new RequestStatusError(
         resp.status,
         resp.statusText,
-        "Les supers utilisateurs ne peuvent utiliser que le panneau d'administration. Essayez de vous connecter avec un autre compte."
+        "Les supers utilisateurs ne peuvent utiliser que le panneau d'administration. Essayez de vous connecter avec un autre compte.",
       );
     }
   }

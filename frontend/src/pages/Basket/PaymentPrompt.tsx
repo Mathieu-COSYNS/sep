@@ -1,8 +1,9 @@
+import { FC, useEffect, useState } from 'react';
 import { IonAlert } from '@ionic/react';
-import { useEffect, FC, useState } from 'react';
-import { setPaymentMethod, useBasket } from 'redux/basketSlice';
-import { useAppDispatch } from 'redux/hooks';
-import { usePaymentMethods } from 'redux/paymentMethodSlice';
+
+import { setPaymentMethod, useBasket } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { usePaymentMethods } from '~/redux/paymentMethodSlice';
 
 export interface PaymentPromptProps {
   open: boolean;
@@ -41,13 +42,15 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
       subHeader={
         !paymentMethods.isLoading && paymentMethods.data ? 'Indiquez comment le client vous a payé' : 'Chargement...'
       }
-      inputs={paymentMethods.data?.map((paymentMethod) => ({
-        name: 'paymentMethod',
-        type: 'radio',
-        label: paymentMethod.name,
-        value: paymentMethod.id,
-        checked: basket.data?.editable.payment_method?.id === paymentMethod.id,
-      }))}
+      inputs={
+        paymentMethods.data?.map((paymentMethod) => ({
+          name: 'paymentMethod',
+          type: 'radio',
+          label: paymentMethod.name,
+          value: paymentMethod.id,
+          checked: basket.data?.editable.payment_method?.id === paymentMethod.id,
+        })) ?? []
+      }
       buttons={[
         {
           text: 'Annuler',

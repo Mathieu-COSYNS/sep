@@ -1,13 +1,14 @@
-import { IonItem } from '@ionic/react';
-import Page from 'components/Page';
-import StateAwareList from 'components/StateAwareList';
-import { capitalize } from 'lodash';
 import { FC, useEffect } from 'react';
-import { loadEntries, useEntries } from 'redux/entriesSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { IonItem } from '@ionic/react';
+import { capitalize } from 'lodash';
+
+import Page from '~/components/Page';
+import StateAwareList from '~/components/StateAwareList';
+import { loadEntries, useEntries } from '~/redux/entriesSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import shared_classes from '../shared.module.scss';
 import EntryItem from './EntryItem';
 import EntryLoading from './EntryLoading';
-import shared_classes from '../shared.module.scss';
 
 const Entries: FC = () => {
   const entries = useEntries();
@@ -37,7 +38,7 @@ const Entries: FC = () => {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
-            })
+            }),
           )
         }
         renderGroup={(group, entries) => (

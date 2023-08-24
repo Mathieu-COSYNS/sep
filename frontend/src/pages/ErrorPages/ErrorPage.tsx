@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { arrowBackOutline } from 'ionicons/icons';
-import Page from 'components/Page';
+
+import Page from '~/components/Page';
 import classes from './ErrorPage.module.scss';
 
 export interface ErrorPageProps {
@@ -18,8 +19,8 @@ const ErrorPage: FC<ErrorPageProps> = ({ title, code, explanation }) => {
           <h1>{code}</h1>
           <p>{explanation}</p>
         </div>
-        <IonButton className={classes.back_button} color="primary" routerLink="/" routerDirection="back" expand="block">
-          <IonIcon icon={arrowBackOutline} slot="start" />
+        <IonButton color="primary" routerLink="/" routerDirection="back" expand="block">
+          <IonIcon icon={arrowBackOutline} slot="start" aria-hidden />
           {"Retour à la page d'accueil"}
         </IonButton>
       </div>

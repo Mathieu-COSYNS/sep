@@ -1,22 +1,23 @@
+import { FC, useRef, useState } from 'react';
 import { IonAlert, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Menu from 'components/Menu';
-import { NotFound } from 'pages/ErrorPages';
-import Stock from 'pages/Stock/Stock';
-import Sales from 'pages/Sales';
-import Entries from 'pages/Entries';
-import Basket from 'pages/Basket';
-import Scanner from 'pages/Scanner';
+
+import LeavePrompt from '~/components/LeavePrompt';
+import Menu from '~/components/Menu';
+import Basket from '~/pages/Basket';
+import Entries from '~/pages/Entries';
+import { NotFound } from '~/pages/ErrorPages';
+import Login from '~/pages/Login';
+import Packs from '~/pages/Packs';
+import QrCode from '~/pages/QrCode';
+import Sales from '~/pages/Sales';
+import Scanner from '~/pages/Scanner';
+import Stock from '~/pages/Stock/Stock';
+import { initializeNewSale } from '~/redux/basketSlice';
+import { useAppDispatch } from '~/redux/hooks';
+import { useUser } from '~/redux/userSlice';
 import RestrictedRoute, { AccessLevel } from './RestrictedRoute';
-import QrCode from 'pages/QrCode';
-import Login from 'pages/Login';
-import { useUser } from 'redux/userSlice';
-import Packs from 'pages/Packs';
-import { FC, useRef, useState } from 'react';
-import LeavePrompt from 'components/LeavePrompt';
-import { useAppDispatch } from 'redux/hooks';
-import { initializeNewSale } from 'redux/basketSlice';
 
 const Router: FC = () => {
   const user = useUser();

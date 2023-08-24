@@ -1,3 +1,4 @@
+import { ReactNode, useEffect, useRef } from 'react';
 import {
   IonBackButton,
   IonButton,
@@ -11,11 +12,11 @@ import {
   IonToolbar,
   useIonRouter,
 } from '@ionic/react';
-import { logOutOutline, logOutSharp, logInOutline, logInSharp } from 'ionicons/icons';
-import { ReactNode, useEffect, useRef } from 'react';
+import { logInOutline, logInSharp, logOutOutline, logOutSharp } from 'ionicons/icons';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from 'redux/hooks';
-import { logout, useUser } from 'redux/userSlice';
+
+import { useAppDispatch } from '~/redux/hooks';
+import { logout, useUser } from '~/redux/userSlice';
 import classes from './Page.module.scss';
 
 export interface PageProps {
@@ -87,12 +88,12 @@ main > slot{
                   onClick={handleLogoutClick}
                 >
                   <span>Se déconnecter</span>
-                  <IonIcon slot="end" ios={logOutOutline} md={logOutSharp} />
+                  <IonIcon slot="end" ios={logOutOutline} md={logOutSharp} aria-hidden />
                 </IonButton>
               ) : (
                 <IonButton fill="clear" size="small" shape="round" className={classes.logout} routerLink="/connexion/">
                   <span>Se Connecter</span>
-                  <IonIcon slot="end" ios={logInOutline} md={logInSharp} />
+                  <IonIcon slot="end" ios={logInOutline} md={logInSharp} aria-hidden />
                 </IonButton>
               )}
             </IonButtons>
