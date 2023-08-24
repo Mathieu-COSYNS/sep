@@ -1,9 +1,10 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText } from '@ionic/react';
-import ListItem from '~/components/ListItem';
 import { FC } from 'react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText } from '@ionic/react';
+
+import ListItem from '~/components/ListItem';
 import { Entry } from '~/types/Entry';
-import classes from './Entries.module.scss';
 import classes_stock from '../Stock/Stock.module.scss';
+import classes from './Entries.module.scss';
 
 export interface EntriesItemProps {
   entry: Entry;

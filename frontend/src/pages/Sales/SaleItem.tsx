@@ -1,11 +1,12 @@
+import { FC } from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, useIonRouter } from '@ionic/react';
+
+import { removeDecimalZeros } from '~/utils/math';
 import Accordions from '~/components/Accordions';
 import ListItem from '~/components/ListItem';
-import { FC } from 'react';
 import { loadSaleIntoBasket } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
 import { Sale } from '~/types/Sale';
-import { removeDecimalZeros } from '~/utils/math';
 import classes from '../Stock/Stock.module.scss';
 
 export interface SaleItemProps {

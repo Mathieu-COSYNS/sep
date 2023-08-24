@@ -1,7 +1,8 @@
-import { useRef, useReducer, FC, ReactNode } from 'react';
-import classes from './Info.module.scss';
-import { informationCircleOutline, informationCircleSharp } from 'ionicons/icons';
+import { FC, ReactNode, useReducer, useRef } from 'react';
 import { IonAlert, IonIcon } from '@ionic/react';
+import { informationCircleOutline, informationCircleSharp } from 'ionicons/icons';
+
+import classes from './Info.module.scss';
 
 interface InfoProps {
   infos?: string;

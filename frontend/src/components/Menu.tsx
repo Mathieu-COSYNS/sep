@@ -1,3 +1,4 @@
+import { FC, Fragment } from 'react';
 import {
   IonContent,
   IonIcon,
@@ -9,28 +10,27 @@ import {
   IonMenuToggle,
   IonNote,
 } from '@ionic/react';
-
-import { useLocation } from 'react-router-dom';
 import {
-  fileTrayOutline,
-  fileTrayFullSharp,
   cartOutline,
   cartSharp,
-  cubeOutline,
-  cubeSharp,
   cogOutline,
   cogSharp,
-  logInSharp,
-  logInOutline,
+  cubeOutline,
+  cubeSharp,
+  fileTrayFullSharp,
+  fileTrayOutline,
   fileTrayStackedOutline,
   fileTrayStackedSharp,
+  logInOutline,
+  logInSharp,
   openOutline,
 } from 'ionicons/icons';
-import classes from './Menu.module.scss';
-import { Fragment, FC } from 'react';
-import { useUser } from '~/redux/userSlice';
-import Version from './Version';
+import { useLocation } from 'react-router-dom';
+
 import environment from '~/environment';
+import { useUser } from '~/redux/userSlice';
+import classes from './Menu.module.scss';
+import Version from './Version';
 
 interface MenuEntry {
   url: string;

@@ -1,11 +1,12 @@
+import { FC, useEffect } from 'react';
 import { IonItem, useIonRouter } from '@ionic/react';
+
+import { Base58 } from '~/utils/base58';
 import Page from '~/components/Page';
 import StateAwareList from '~/components/StateAwareList';
-import { useEffect, FC } from 'react';
 import { useAppDispatch } from '~/redux/hooks';
 import { loadProducts, useProducts } from '~/redux/productsSlice';
 import { Product } from '~/types/Product';
-import { Base58 } from '~/utils/base58';
 import StockItem from './StockItem';
 import StockLoading from './StockLoading';
 

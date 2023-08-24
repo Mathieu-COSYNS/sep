@@ -1,8 +1,9 @@
-import { IonButton, IonCard, IonCardContent, IonIcon } from '@ionic/react';
 import { FC, ReactNode } from 'react';
 import { Color } from '@ionic/core/dist/types/interface';
-import classes from './Message.module.scss';
+import { IonButton, IonCard, IonCardContent, IonIcon } from '@ionic/react';
 import { closeOutline, closeSharp } from 'ionicons/icons';
+
+import classes from './Message.module.scss';
 
 interface MessageProps {
   onDismiss?: () => void;

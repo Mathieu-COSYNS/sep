@@ -1,20 +1,21 @@
+import { FC, useEffect, useState } from 'react';
+import { useToast } from '@agney/ir-toast';
 import { IonButton, IonFab, IonFabButton, IonIcon, IonItem, useIonLoading, useIonRouter } from '@ionic/react';
-import Page from '~/components/Page';
 import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
-import { useEffect, useState, FC } from 'react';
+
+import { removeDecimalZeros } from '~/utils/math';
+import Page from '~/components/Page';
+import StateAwareList from '~/components/StateAwareList';
 import { initializeNewSale, saveBasket, useBasket, useIsBasketDirty } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
+import { loadPaymentMethods } from '~/redux/paymentMethodSlice';
+import { EditableSaleItem } from '~/types/SaleItem';
+import classes from './Basket.module.scss';
+import BasketEditItem from './BasketEditItem';
+import BasketItem from './BasketItem';
 import BasketLoading from './BasketLoading';
 import BasketRemoveItem from './BasketRemoveItem';
-import classes from './Basket.module.scss';
-import StateAwareList from '~/components/StateAwareList';
-import BasketItem from './BasketItem';
-import { EditableSaleItem } from '~/types/SaleItem';
-import { removeDecimalZeros } from '~/utils/math';
 import PaymentPrompt from './PaymentPrompt';
-import { loadPaymentMethods } from '~/redux/paymentMethodSlice';
-import BasketEditItem from './BasketEditItem';
-import { useToast } from '@agney/ir-toast';
 
 const Basket: FC = () => {
   const [editSaleItem, setEditSaleItem] = useState<EditableSaleItem | undefined>();

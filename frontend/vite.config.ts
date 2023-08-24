@@ -1,13 +1,14 @@
 import path from 'path';
-import { loadEnv } from 'vite';
-import { defineConfig } from 'vitest/config';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
-import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
+import react from '@vitejs/plugin-react';
+import { loadEnv } from 'vite';
+import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
-import transformManifest from './transform-manifest';
+import { defineConfig } from 'vitest/config';
+
 import config from './app.config.json';
+import transformManifest from './transform-manifest';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());

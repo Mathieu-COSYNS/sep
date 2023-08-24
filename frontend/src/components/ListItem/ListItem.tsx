@@ -1,8 +1,9 @@
-import { IonButton, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/react';
-import useBreakpoints from '~/hooks/useBreakpoints';
-import { pencilOutline, pencilSharp, trashBinOutline, trashBinSharp } from 'ionicons/icons';
 import { FC, ReactNode, useEffect, useRef } from 'react';
 import { Color } from '@ionic/core/dist/types/interface';
+import { IonButton, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/react';
+import { pencilOutline, pencilSharp, trashBinOutline, trashBinSharp } from 'ionicons/icons';
+
+import useBreakpoints from '~/hooks/useBreakpoints';
 import classes from './ListItem.module.scss';
 
 export interface ListItemProps {

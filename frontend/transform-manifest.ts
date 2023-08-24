@@ -1,5 +1,5 @@
-import { join } from 'path';
 import { readFile, writeFile } from 'fs/promises';
+import { join } from 'path';
 import { Plugin, ResolvedConfig } from 'vite';
 
 export interface TransformManifestConfig {

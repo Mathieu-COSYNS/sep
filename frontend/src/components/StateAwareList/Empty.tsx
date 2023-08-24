@@ -1,5 +1,5 @@
-import { IonItem, IonLabel } from '@ionic/react';
 import { FC } from 'react';
+import { IonItem, IonLabel } from '@ionic/react';
 
 export interface EmptyProps {
   message: string;

@@ -1,6 +1,6 @@
 // @see https://www.carlrippon.com/react-context-with-typescript-p4/
 
-import { useContext, createContext, Provider } from 'react';
+import { createContext, Provider, useContext } from 'react';
 
 export const createCtx = <ContextType>(): readonly [() => ContextType, Provider<ContextType | undefined>] => {
   const ctx = createContext<ContextType | undefined>(undefined);

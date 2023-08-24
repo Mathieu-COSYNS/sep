@@ -1,5 +1,6 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
 import { FC } from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonSkeletonText } from '@ionic/react';
+
 import classes from '../Stock/Stock.module.scss';
 
 const SaleLoading: FC = () => {

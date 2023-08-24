@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { LocationDescriptor } from 'history';
+import { Redirect, Route, RouteProps } from 'react-router-dom';
+
 import { Unauthorized } from '~/pages/ErrorPages';
 import { useUser } from '~/redux/userSlice';
 

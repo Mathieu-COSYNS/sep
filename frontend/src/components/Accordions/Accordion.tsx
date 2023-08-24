@@ -1,6 +1,7 @@
+import { FC, ReactNode } from 'react';
 import { IonIcon } from '@ionic/react';
 import { chevronForwardOutline, chevronForwardSharp } from 'ionicons/icons';
-import { FC, ReactNode } from 'react';
+
 import classes from './Accordion.module.scss';
 
 const Accordion: FC<{ title: string; expand: boolean; children: ReactNode; onClick: () => void }> = ({

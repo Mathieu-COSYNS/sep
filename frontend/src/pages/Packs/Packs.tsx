@@ -1,12 +1,13 @@
+import { FC, useEffect } from 'react';
 import { IonItem, useIonRouter } from '@ionic/react';
+
+import { Base58 } from '~/utils/base58';
 import Page from '~/components/Page';
 import StateAwareList from '~/components/StateAwareList';
-import PackItem from './PackItem';
-import { useEffect, FC } from 'react';
 import { useAppDispatch } from '~/redux/hooks';
 import { loadPacks, usePacks } from '~/redux/packsSlice';
 import { Pack } from '~/types/Pack';
-import { Base58 } from '~/utils/base58';
+import PackItem from './PackItem';
 import PackLoading from './PackLoading';
 
 const base58 = new Base58();

@@ -1,5 +1,5 @@
+import { FC, useEffect, useRef } from 'react';
 import { IonRefresher, IonRefresherContent } from '@ionic/react';
-import { useEffect, useRef, FC } from 'react';
 
 export interface RefresherProps {
   isLoading: boolean;

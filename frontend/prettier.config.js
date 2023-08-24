@@ -16,4 +16,18 @@ export default {
   bracketSameLine: false,
   arrowParens: 'always',
   endOfLine: 'lf',
+  plugins: ['@ianvs/prettier-plugin-sort-imports'],
+  importOrder: [
+    '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
+    '^(next/(.*)$)|^(next$)',
+    '^(expo(.*)$)|^(expo$)',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '^~/lib/(.*)$',
+    '^~/utils/(.*)$',
+    '^~/(.*)$',
+    '^[./]',
+    '.css$',
+    '.scss$',
+  ],
 };

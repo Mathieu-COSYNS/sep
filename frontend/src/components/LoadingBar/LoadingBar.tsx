@@ -1,6 +1,7 @@
+import React from 'react';
 import { IonProgressBar } from '@ionic/react';
 import { useNProgress } from '@tanem/react-nprogress';
-import React from 'react';
+
 import classes from './LoadingBar.module.scss';
 
 const LoadingBar: React.FC<{ show: boolean }> = ({ show }) => {

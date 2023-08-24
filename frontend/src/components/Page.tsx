@@ -1,3 +1,4 @@
+import { ReactNode, useEffect, useRef } from 'react';
 import {
   IonBackButton,
   IonButton,
@@ -11,9 +12,9 @@ import {
   IonToolbar,
   useIonRouter,
 } from '@ionic/react';
-import { logOutOutline, logOutSharp, logInOutline, logInSharp } from 'ionicons/icons';
-import { ReactNode, useEffect, useRef } from 'react';
+import { logInOutline, logInSharp, logOutOutline, logOutSharp } from 'ionicons/icons';
 import { useParams } from 'react-router-dom';
+
 import { useAppDispatch } from '~/redux/hooks';
 import { logout, useUser } from '~/redux/userSlice';
 import classes from './Page.module.scss';

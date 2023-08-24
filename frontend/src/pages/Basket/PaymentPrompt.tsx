@@ -1,5 +1,6 @@
+import { FC, useEffect, useState } from 'react';
 import { IonAlert } from '@ionic/react';
-import { useEffect, FC, useState } from 'react';
+
 import { setPaymentMethod, useBasket } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
 import { usePaymentMethods } from '~/redux/paymentMethodSlice';

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { isEqual } from 'lodash';
+
 import { packApi } from '~/api/packAPI';
 import { productApi } from '~/api/productAPI';
 import { saleApi } from '~/api/saleAPI';
-import { isEqual } from 'lodash';
 import { Id } from '~/types/Id';
 import { Pack } from '~/types/Pack';
 import { PaymentMethod } from '~/types/PaymentMethod';
