@@ -17,61 +17,61 @@
   "rewrites": [
     {
       "source": "/admin/",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/admin/",
+      "destination": "https://sep-prod-backend.herokuapp.com/admin/",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
     {
       "source": "/admin/:path*/",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/admin/:path*/",
+      "destination": "https://sep-prod-backend.herokuapp.com/admin/:path*/",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
     {
       "source": "/django_lang_switch/:path*/",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/django_lang_switch/:path*/",
+      "destination": "https://sep-prod-backend.herokuapp.com/django_lang_switch/:path*/",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
     {
       "source": "/static/admin/:path*",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/static/admin/:path*",
+      "destination": "https://sep-prod-backend.herokuapp.com/static/admin/:path*",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
     {
       "source": "/static/django_lang_switch/:path*",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/static/django_lang_switch/:path*",
+      "destination": "https://sep-prod-backend.herokuapp.com/static/django_lang_switch/:path*",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
     {
       "source": "/static/admin_plus/:path*",
-      "destination": "https://sep-cerclesolvay.herokuapp.com/static/admin_plus/:path*",
+      "destination": "https://sep-prod-backend.herokuapp.com/static/admin_plus/:path*",
       "has": [
         {
           "type": "host",
-          "value": "sep-ten.vercel.app"
+          "value": "sep-git-test-solvay-mathieu-cosyns.vercel.app"
         }
       ]
     },
