@@ -4,13 +4,11 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 
 import { serializeError } from '~/utils/errors';
-import { loginUser } from '~/api/userAPI';
 import FormSubmitButton from '~/components/FormSubmitButton';
 import Message from '~/components/Message';
 import Page from '~/components/Page';
 import RequiredAsterisk from '~/components/RequiredAsterisk';
-import { useAppDispatch } from '~/redux/hooks';
-import { login } from '~/redux/userSlice';
+import { useAuth } from '~/hooks/useAuth';
 import classes from './Login.module.scss';
 
 interface LoginFormValues {
@@ -24,7 +22,7 @@ const validationSchema = object({
 });
 
 const Login: FC = () => {
-  const dispatch = useAppDispatch();
+  const { login } = useAuth();
   const router = useIonRouter();
   const initialValues: LoginFormValues = { username: '', password: '' };
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
@@ -33,9 +31,8 @@ const Login: FC = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await loginUser(values.username, values.password);
+        await login(values.username, values.password);
         setErrorMessage(undefined);
-        dispatch(login(result));
         resetForm({});
         router.push('/stock/');
       } catch (e) {

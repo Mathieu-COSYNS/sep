@@ -5,6 +5,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import LeavePrompt from '~/components/LeavePrompt';
 import Menu from '~/components/Menu';
+import { useAuth } from '~/hooks/useAuth';
 import Basket from '~/pages/Basket';
 import Entries from '~/pages/Entries';
 import { NotFound } from '~/pages/ErrorPages';
@@ -16,11 +17,10 @@ import Scanner from '~/pages/Scanner';
 import Stock from '~/pages/Stock/Stock';
 import { initializeNewSale } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
-import { useUser } from '~/redux/userSlice';
 import RestrictedRoute, { AccessLevel } from './RestrictedRoute';
 
 const Router: FC = () => {
-  const user = useUser();
+  const { user } = useAuth();
   const dispatch = useAppDispatch();
   const [leaveConfirmMessage, setLeaveConfirmMessage] = useState<string>();
   const confirmCallback = useRef<(ok: boolean) => void>();
@@ -40,7 +40,7 @@ const Router: FC = () => {
         <IonRouterOutlet id="main">
           <Switch>
             <RestrictedRoute
-              path="/qr/:slug/:base58Id/"
+              path="/qr/:slug(product|pack)/:base58Id/"
               accessLevel={AccessLevel.AUTHENTICATED}
               exact={true}
               strict={true}
@@ -49,7 +49,7 @@ const Router: FC = () => {
             </RestrictedRoute>
             <RestrictedRoute
               path="/connexion/"
-              accessLevel={AccessLevel.ANONYM}
+              accessLevel={AccessLevel.ANONYMOUS}
               redirectTo="/stock/"
               exact={true}
               strict={true}
@@ -95,7 +95,7 @@ const Router: FC = () => {
               path="/"
               exact={true}
               strict={false}
-              render={() => (user.data ? <Redirect to="/stock/" /> : <Redirect to="/connexion/" />)}
+              render={() => (user ? <Redirect to="/stock/" /> : <Redirect to="/connexion/" />)}
             />
             <Route component={NotFound} exact={false} strict={false} />
           </Switch>

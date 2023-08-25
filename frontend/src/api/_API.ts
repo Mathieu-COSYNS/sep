@@ -15,7 +15,7 @@ export class ReadApi<ReadDataType extends BaseObject> {
     return this._slug;
   }
 
-  fetchAll = async (): Promise<ReadDataType[] | undefined> => {
+  fetchAll = async (): Promise<ReadDataType[]> => {
     const resp = await fetch(`${environment.API_URL}/${this.slug}/`, {
       method: 'GET',
       headers: new Headers({
@@ -27,7 +27,7 @@ export class ReadApi<ReadDataType extends BaseObject> {
     return await resp.json();
   };
 
-  fetchById = async (id: Id): Promise<ReadDataType | undefined> => {
+  fetchById = async (id: Id): Promise<ReadDataType> => {
     const resp = await fetch(`${environment.API_URL}/${this.slug}/${id}/`, {
       method: 'GET',
       headers: new Headers({

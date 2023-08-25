@@ -1,18 +1,20 @@
 import { ReactElement, ReactNode, useMemo, useState } from 'react';
-import { IonButton, IonButtons, IonIcon, IonList, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonIcon, IonItem, IonList, IonToolbar } from '@ionic/react';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
 import { GroupedVirtuoso, Virtuoso } from 'react-virtuoso';
 
+import { serializeError } from '~/utils/errors';
 import LoadingBar from '~/components/LoadingBar';
 import Refresher from '~/components/Refresher';
 import useBreakpoints from '~/hooks/useBreakpoints';
 import Empty from './Empty';
 import classes from './StateAwareList.module.scss';
 
-export interface StateAwareList<Item> {
+export interface StateAwareListProps<Item> {
   state: {
     isLoading: boolean;
+    isRefetching?: boolean;
     error?: unknown;
     items?: Item[];
   };
@@ -21,7 +23,7 @@ export interface StateAwareList<Item> {
   numberOfLoadingComponents?: number;
   emptyComponent: string | ReactNode;
   renderItem: (item: Item) => ReactNode;
-  renderError: (error: unknown) => ReactNode;
+  renderError?: (error: unknown) => ReactNode;
   keyResolver: (item: Item) => string;
   groupResolver?: (item: Item) => string;
   renderGroup?: (group: string, items: Item[]) => ReactNode;
@@ -40,7 +42,7 @@ const StateAwareList = <Item,>({
   groupResolver,
   renderGroup,
   onRefresh,
-}: StateAwareList<Item>): ReactElement => {
+}: StateAwareListProps<Item>): ReactElement => {
   const { minBreakpoint } = useBreakpoints();
   const [atTop, setAtTop] = useState(true);
 
@@ -49,27 +51,18 @@ const StateAwareList = <Item,>({
 
   let content = undefined;
   if (state.isLoading) {
-    content = (
-      <div className={classes.container}>
-        <div style={{ position: 'relative' }}>
-          <LoadingBar show={true} />
-          <IonList style={{ height: '100%' }}>
-            <Virtuoso totalCount={numberOfLoadingComponents} itemContent={() => loadingComponent} />
-          </IonList>
-        </div>
-      </div>
-    );
+    content = <Virtuoso totalCount={numberOfLoadingComponents} itemContent={() => loadingComponent} />;
   }
 
   if (!content && state.error) {
-    content = <IonList>{renderError(state.error)}</IonList>;
+    content = renderError?.(state.error) ?? (
+      <IonItem>Error: {JSON.stringify(serializeError(state.error), undefined, 2)}</IonItem>
+    );
   }
 
   if (!content) {
     if (!state.items || state.items.length === 0) {
-      content = (
-        <IonList>{typeof emptyComponent === 'string' ? <Empty message={emptyComponent} /> : emptyComponent}</IonList>
-      );
+      content = typeof emptyComponent === 'string' ? <Empty message={emptyComponent} /> : emptyComponent;
     } else {
       const data = state.items;
       const commonVirtuosoProps = {
@@ -77,23 +70,16 @@ const StateAwareList = <Item,>({
         computeItemKey: (index: number, item: Item) => (item ? keyResolver(item) : index),
         atTopStateChange: (atTop: boolean) => setAtTop(atTop),
       };
-      content = (
-        <IonList className={classes.container}>
-          <div>
-            {groupResolver && renderGroup ? (
-              <GroupedVirtuoso
-                groupCounts={groupCounts}
-                groupContent={(index) => (
-                  <>{renderGroup(Object.keys(groups)[index], groups[Object.keys(groups)[index]])}</>
-                )}
-                {...commonVirtuosoProps}
-              />
-            ) : (
-              <Virtuoso totalCount={data.length} {...commonVirtuosoProps} />
-            )}
-          </div>
-        </IonList>
-      );
+      content =
+        groupResolver && renderGroup ? (
+          <GroupedVirtuoso
+            groupCounts={groupCounts}
+            groupContent={(index) => <>{renderGroup(Object.keys(groups)[index], groups[Object.keys(groups)[index]])}</>}
+            {...commonVirtuosoProps}
+          />
+        ) : (
+          <Virtuoso totalCount={data.length} {...commonVirtuosoProps} />
+        );
     }
   }
 
@@ -109,14 +95,19 @@ const StateAwareList = <Item,>({
   return (
     <>
       {!minBreakpoint('md') && !!onRefresh && (
-        <Refresher isLoading={state.isLoading} onRefresh={onRefresh} disabled={!atTop} />
+        <Refresher isLoading={state.isLoading || state.isRefetching || false} onRefresh={onRefresh} disabled={!atTop} />
       )}
       {!!toolbarButtons && toolbarButtons.length > 0 && (
         <IonToolbar color="light">
           <IonButtons slot="start">{toolbarButtons}</IonButtons>
         </IonToolbar>
       )}
-      {content}
+      <div className={classes.container}>
+        <div style={{ position: 'relative' }}>
+          <LoadingBar show={state.isLoading || state.isRefetching || false} />
+          <IonList style={{ height: '100%' }}>{content}</IonList>
+        </div>
+      </div>
     </>
   );
 };

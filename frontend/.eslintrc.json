@@ -19,7 +19,6 @@
   },
   "plugins": ["prettier", "react", "react-hooks", "jsx-a11y", "@typescript-eslint"],
   "rules": {
-    "indent": ["error", 2, { "MemberExpression": 1, "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single", { "avoidEscape": true }],
     "semi": ["error", "always"],

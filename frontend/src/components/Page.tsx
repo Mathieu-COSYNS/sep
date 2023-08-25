@@ -15,8 +15,7 @@ import {
 import { logInOutline, logInSharp, logOutOutline, logOutSharp } from 'ionicons/icons';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch } from '~/redux/hooks';
-import { logout, useUser } from '~/redux/userSlice';
+import { useAuth } from '~/hooks/useAuth';
 import classes from './Page.module.scss';
 
 export interface PageProps {
@@ -39,8 +38,7 @@ const Page: React.FC<PageProps> = ({
 }) => {
   const ionContentRef = useRef<HTMLIonContentElement>(null);
   const { name } = useParams<{ name: string }>();
-  const user = useUser();
-  const dispatch = useAppDispatch();
+  const { user, logout } = useAuth();
   const router = useIonRouter();
 
   useEffect(() => {
@@ -56,7 +54,7 @@ main > slot{
   }, []);
 
   const handleLogoutClick = () => {
-    dispatch(logout());
+    logout();
     router.push('/connexion/');
   };
 
@@ -79,7 +77,7 @@ main > slot{
           <IonTitle>{title}</IonTitle>
           {!hideLoginLogoutButton && (
             <IonButtons slot="end">
-              {user.data ? (
+              {user ? (
                 <IonButton
                   fill="clear"
                   size="small"

@@ -2,11 +2,11 @@ import { FC, ReactNode } from 'react';
 import { LocationDescriptor } from 'history';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
+import { useAuth } from '~/hooks/useAuth';
 import { Unauthorized } from '~/pages/ErrorPages';
-import { useUser } from '~/redux/userSlice';
 
 export enum AccessLevel {
-  ANONYM,
+  ANONYMOUS,
   AUTHENTICATED,
 }
 export interface RestrictedRouteProps extends RouteProps {
@@ -16,14 +16,14 @@ export interface RestrictedRouteProps extends RouteProps {
 }
 
 const RestrictedRoute: FC<RestrictedRouteProps> = ({ children, accessLevel, redirectTo, ...props }) => {
-  const user = useUser();
+  const { user } = useAuth();
   let canAccess = false;
   switch (accessLevel) {
-    case AccessLevel.ANONYM:
-      canAccess = !user.data;
+    case AccessLevel.ANONYMOUS:
+      canAccess = !user;
       break;
     case AccessLevel.AUTHENTICATED:
-      canAccess = !!user.data;
+      canAccess = !!user;
       break;
   }
   const check = () => (canAccess ? children : redirectTo ? <Redirect to={redirectTo} /> : <Unauthorized />);

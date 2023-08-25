@@ -1,24 +1,12 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 import basketReducer from './basketSlice';
-import entriesReducer from './entriesSlice';
-import packsReducer from './packsSlice';
-import paymentMethodReducer from './paymentMethodSlice';
-import productsReducer from './productsSlice';
-import qrCodeReducer from './qrCodeSlice';
 import salesReducer from './salesSlice';
-import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
     basket: basketReducer,
-    user: userReducer,
-    entries: entriesReducer,
-    products: productsReducer,
-    packs: packsReducer,
     sales: salesReducer,
-    qrCode: qrCodeReducer,
-    paymentMethods: paymentMethodReducer,
   },
 });
 

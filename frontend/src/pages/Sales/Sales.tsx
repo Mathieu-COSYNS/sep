@@ -1,30 +1,20 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { IonButton, IonIcon, IonItem, useIonRouter } from '@ionic/react';
 import { addOutline, addSharp, downloadOutline, downloadSharp } from 'ionicons/icons';
 import { capitalize } from 'lodash';
 
-import { downloadSalesReport } from '~/api/saleAPI';
+import { downloadSalesReport, saleApi } from '~/api/saleAPI';
 import Page from '~/components/Page';
-import StateAwareList from '~/components/StateAwareList';
+import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
 import { initializeNewSale } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
-import { loadSales, useSales } from '~/redux/salesSlice';
 import shared_classes from '../shared.module.scss';
 import SaleItem from './SaleItem';
 import SaleLoading from './SaleLoading';
 
 const Sales: FC = () => {
-  const sales = useSales();
   const dispatch = useAppDispatch();
   const router = useIonRouter();
-
-  useEffect(() => {
-    dispatch(loadSales());
-  }, [dispatch]);
-
-  const handleRefresh = () => {
-    dispatch(loadSales());
-  };
 
   const handleAddButtonClick = () => {
     dispatch(initializeNewSale());
@@ -37,8 +27,8 @@ const Sales: FC = () => {
 
   return (
     <Page title="Ventes">
-      <StateAwareList
-        state={{ isLoading: sales.isLoading, items: sales.data, error: sales.error }}
+      <ReactQueryStateAwareList
+        reactQueryOptions={{ queryKey: ['sales/all'], queryFn: saleApi.fetchAll }}
         toolbarButtons={[
           <IonButton key="1" fill="clear" shape="round" onClick={handleAddButtonClick}>
             <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
@@ -73,7 +63,6 @@ const Sales: FC = () => {
             </p>
           </div>
         )}
-        onRefresh={handleRefresh}
       />
     </Page>
   );

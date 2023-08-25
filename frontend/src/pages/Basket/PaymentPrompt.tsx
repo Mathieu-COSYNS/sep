@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { IonAlert } from '@ionic/react';
+import { useQuery } from '@tanstack/react-query';
 
+import { paymentMethodAPI } from '~/api/paymentMethodAPI';
 import { setPaymentMethod, useBasket } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
-import { usePaymentMethods } from '~/redux/paymentMethodSlice';
 
 export interface PaymentPromptProps {
   open: boolean;
@@ -14,8 +15,8 @@ export interface PaymentPromptProps {
 const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish }) => {
   const [closing, setClosing] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const paymentMethods = usePaymentMethods();
   const basket = useBasket();
+  const paymentMethods = useQuery(['paymentMethods/all'], paymentMethodAPI.fetchAll);
 
   const autoSelectPayment =
     !paymentMethods.isLoading && paymentMethods.data?.length == 1 ? paymentMethods.data[0] : undefined;
@@ -40,7 +41,14 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
       onDidDismiss={onDidDismiss}
       header={'Payment'}
       subHeader={
-        !paymentMethods.isLoading && paymentMethods.data ? 'Indiquez comment le client vous a payé' : 'Chargement...'
+        !paymentMethods.isLoading && paymentMethods.data ? 'Indiquez comment le client vous a payé' : undefined
+      }
+      message={
+        paymentMethods.isLoading
+          ? 'Chargement...'
+          : paymentMethods.isError
+          ? JSON.stringify(paymentMethods.error)
+          : undefined
       }
       inputs={
         paymentMethods.data?.map((paymentMethod) => ({

@@ -1,36 +1,22 @@
-import { FC, useEffect } from 'react';
-import { IonItem } from '@ionic/react';
+import { FC } from 'react';
 import { capitalize } from 'lodash';
 
+import { entriesApi } from '~/api/entriesAPI';
 import Page from '~/components/Page';
-import StateAwareList from '~/components/StateAwareList';
-import { loadEntries, useEntries } from '~/redux/entriesSlice';
-import { useAppDispatch } from '~/redux/hooks';
+import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
 import shared_classes from '../shared.module.scss';
 import EntryItem from './EntryItem';
 import EntryLoading from './EntryLoading';
 
 const Entries: FC = () => {
-  const entries = useEntries();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadEntries());
-  }, [dispatch]);
-
-  const handleRefresh = () => {
-    dispatch(loadEntries());
-  };
-
   return (
     <Page title="Entrées">
-      <StateAwareList
-        state={{ isLoading: entries.isLoading, items: entries.data, error: entries.error }}
+      <ReactQueryStateAwareList
+        reactQueryOptions={{ queryKey: ['entries/all'], queryFn: entriesApi.fetchAll }}
         renderItem={(entry) => <EntryItem entry={entry} />}
         keyResolver={(entry) => `${entry.id}`}
         loadingComponent={<EntryLoading />}
         emptyComponent={'Aucune Entrée'}
-        renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}
         groupResolver={(entry) =>
           capitalize(
             new Date(entry.created_date).toLocaleDateString('fr-BE', {
@@ -48,7 +34,6 @@ const Entries: FC = () => {
             </p>
           </div>
         )}
-        onRefresh={handleRefresh}
       />
     </Page>
   );

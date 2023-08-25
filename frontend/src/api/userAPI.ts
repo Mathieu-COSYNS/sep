@@ -28,10 +28,10 @@ export const loginUser = async (username: string, password: string): Promise<Use
   return content;
 };
 
-export const fetchCurrentUser = async (): Promise<User | undefined> => {
+export const fetchCurrentUser = async (): Promise<User | null> => {
   const token = localStorage.getItem('token');
   if (!token) {
-    return undefined;
+    return null;
   }
   const resp = await fetch(`${environment.API_URL}/current-user/`, {
     method: 'GET',

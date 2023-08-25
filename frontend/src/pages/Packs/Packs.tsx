@@ -1,11 +1,10 @@
-import { FC, useEffect } from 'react';
-import { IonItem, useIonRouter } from '@ionic/react';
+import { FC } from 'react';
+import { useIonRouter } from '@ionic/react';
 
 import { Base58 } from '~/utils/base58';
+import { packApi } from '~/api/packAPI';
 import Page from '~/components/Page';
-import StateAwareList from '~/components/StateAwareList';
-import { useAppDispatch } from '~/redux/hooks';
-import { loadPacks, usePacks } from '~/redux/packsSlice';
+import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
 import { Pack } from '~/types/Pack';
 import PackItem from './PackItem';
 import PackLoading from './PackLoading';
@@ -14,12 +13,6 @@ const base58 = new Base58();
 
 const Packs: FC = () => {
   const router = useIonRouter();
-  const packs = usePacks();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadPacks());
-  }, [dispatch]);
 
   const handleEditButtonClick = (pack: Pack) => {
     console.log('edit', pack);
@@ -29,14 +22,10 @@ const Packs: FC = () => {
     router.push(`/qr/pack/${base58.encode(pack.id)}/`);
   };
 
-  const handleRefresh = () => {
-    dispatch(loadPacks());
-  };
-
   return (
     <Page title="Packs">
-      <StateAwareList
-        state={{ isLoading: packs.isLoading, items: packs.data, error: packs.error }}
+      <ReactQueryStateAwareList
+        reactQueryOptions={{ queryKey: ['packs/all'], queryFn: packApi.fetchAll }}
         renderItem={(pack) => (
           <PackItem
             pack={pack}
@@ -47,8 +36,6 @@ const Packs: FC = () => {
         keyResolver={(pack) => `${pack.id}`}
         loadingComponent={<PackLoading />}
         emptyComponent={'Aucun Pack'}
-        renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}
-        onRefresh={handleRefresh}
       />
     </Page>
   );

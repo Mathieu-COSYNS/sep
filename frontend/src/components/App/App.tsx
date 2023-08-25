@@ -5,14 +5,13 @@ import { CSSTransition } from 'react-transition-group';
 
 import LoadingBar from '~/components/LoadingBar';
 import WaitingServerConnection from '~/pages/WaitingServerConnection';
-import { useAppDispatch } from '~/redux/hooks';
-import { loadUser, useUser } from '~/redux/userSlice';
 import Router from '~/router/Router';
 
 import '~/theme/index.scss';
 
 import Info from '~/components/Info';
 import { usePWAContext } from '~/contexts/PWAContext';
+import { useAuth } from '~/hooks/useAuth';
 import useNetwork from '~/hooks/useNetwork';
 import { useBannerStore } from '~/store/bannerStore';
 import classes from './App.module.scss';
@@ -21,8 +20,7 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const { showUpdateAvailable } = usePWAContext();
-  const asyncUser = useUser();
-  const dispatch = useAppDispatch();
+  const { isLoading } = useAuth();
   const { getBanner, addOfflineBanner, addUpdateAvailableBanner, removeOfflineBanner, removeUpdateAvailableBanner } =
     useBannerStore();
   const banner = getBanner();
@@ -30,16 +28,12 @@ const App: React.FC = () => {
   const nodeRef = useRef();
 
   useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (network.offline) {
       addOfflineBanner();
     } else {
       removeOfflineBanner();
     }
-  }, [dispatch, network.offline]);
+  }, [addOfflineBanner, network.offline, removeOfflineBanner]);
 
   useEffect(() => {
     if (showUpdateAvailable) {
@@ -47,11 +41,11 @@ const App: React.FC = () => {
     } else {
       removeUpdateAvailableBanner();
     }
-  }, [dispatch, showUpdateAvailable]);
+  }, [addUpdateAvailableBanner, removeUpdateAvailableBanner, showUpdateAvailable]);
 
   return (
     <>
-      <LoadingBar show={asyncUser.isLoading} />
+      <LoadingBar show={isLoading} />
       <CSSTransition nodeRef={nodeRef} mountOnEnter={true} unmountOnExit={true} in={!!banner} timeout={200}>
         <div
           className={classes.banner}
@@ -64,9 +58,7 @@ const App: React.FC = () => {
         </div>
       </CSSTransition>
       <IonApp className={classes.ion_app} style={{ top: banner ? '1.5rem' : '0' }}>
-        <ToastProvider value={{ duration: 2000 }}>
-          {asyncUser.isLoading ? <WaitingServerConnection /> : <Router />}
-        </ToastProvider>
+        <ToastProvider value={{ duration: 2000 }}>{isLoading ? <WaitingServerConnection /> : <Router />}</ToastProvider>
       </IonApp>
     </>
   );

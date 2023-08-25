@@ -8,7 +8,6 @@ import Page from '~/components/Page';
 import StateAwareList from '~/components/StateAwareList';
 import { initializeNewSale, saveBasket, useBasket, useIsBasketDirty } from '~/redux/basketSlice';
 import { useAppDispatch } from '~/redux/hooks';
-import { loadPaymentMethods } from '~/redux/paymentMethodSlice';
 import { EditableSaleItem } from '~/types/SaleItem';
 import classes from './Basket.module.scss';
 import BasketEditItem from './BasketEditItem';
@@ -28,10 +27,6 @@ const Basket: FC = () => {
   const basket = useBasket();
   const isBasketDirty = useIsBasketDirty();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadPaymentMethods());
-  }, [dispatch]);
 
   useEffect(() => {
     if (!basket.isLoading && !basket.data) dispatch(initializeNewSale());

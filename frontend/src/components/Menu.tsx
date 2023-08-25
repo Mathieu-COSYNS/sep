@@ -28,7 +28,7 @@ import {
 import { useLocation } from 'react-router-dom';
 
 import environment from '~/environment';
-import { useUser } from '~/redux/userSlice';
+import { useAuth } from '~/hooks/useAuth';
 import classes from './Menu.module.scss';
 import Version from './Version';
 
@@ -87,19 +87,19 @@ const userPages: MenuEntry[] = [
 
 const Menu: FC = () => {
   const location = useLocation();
-  const user = useUser();
+  const { user } = useAuth();
 
-  const pages = user.data ? userPages : anonPages;
+  const pages = user ? userPages : anonPages;
 
   return (
     <IonMenu contentId="main" type="overlay" className={classes.menu}>
       <IonContent>
         <IonList>
-          {user.data && (
+          {user && (
             <>
               <div className={classes.user_box}>
                 <IonNote>
-                  Bonjour, <strong>{user.data.name}</strong>
+                  Bonjour, <strong>{user.name}</strong>
                 </IonNote>
               </div>
               <hr />
