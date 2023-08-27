@@ -71,7 +71,12 @@ const QrCode: FC = () => {
   };
 
   return (
-    <Page title="Qr Code" backButton={true} defaultBackUrl={slug === 'pack' ? '/packs/' : '/stock/'} backText={'Stock'}>
+    <Page
+      title="QR Code"
+      backButton={true}
+      defaultBackUrl={slug === 'pack' ? '/packs/' : '/stock/'}
+      backText={slug === 'pack' ? 'Packs' : 'Stock'}
+    >
       <div className={classes.qr_code_page}>
         <IonItem>
           <IonSelect

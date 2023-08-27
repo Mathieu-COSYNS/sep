@@ -13,10 +13,9 @@ const base58 = new Base58();
 export interface PackItemProps {
   pack: Pack;
   onQrCodeButtonClick: (pack: Pack) => void;
-  onEditButtonClick: (pack: Pack) => void;
 }
 
-const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick /*onEditButtonClick*/ }) => {
+const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick }) => {
   const customButtons: ListItemButton[] = [
     {
       id: 'qr-code',
@@ -33,7 +32,6 @@ const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick /*onEditButtonC
       <ListItem
         key={pack.id}
         card={true}
-        // onClickEditButton={onEditButtonClick.bind(this, pack)}
         customButtons={customButtons}
         after={
           <Accordions

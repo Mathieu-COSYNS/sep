@@ -14,10 +14,6 @@ const base58 = new Base58();
 const Packs: FC = () => {
   const router = useIonRouter();
 
-  const handleEditButtonClick = (pack: Pack) => {
-    console.log('edit', pack);
-  };
-
   const handleQrCodeButtonClick = (pack: Pack) => {
     router.push(`/qr/pack/${base58.encode(pack.id)}/`);
   };
@@ -26,13 +22,7 @@ const Packs: FC = () => {
     <Page title="Packs">
       <ReactQueryStateAwareList
         reactQueryOptions={{ queryKey: ['packs/all'], queryFn: packApi.fetchAll }}
-        renderItem={(pack) => (
-          <PackItem
-            pack={pack}
-            onQrCodeButtonClick={handleQrCodeButtonClick}
-            onEditButtonClick={handleEditButtonClick}
-          />
-        )}
+        renderItem={(pack) => <PackItem pack={pack} onQrCodeButtonClick={handleQrCodeButtonClick} />}
         keyResolver={(pack) => `${pack.id}`}
         loadingComponent={<PackLoading />}
         emptyComponent={'Aucun Pack'}
