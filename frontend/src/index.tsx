@@ -1,12 +1,11 @@
 import { StrictMode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
-// import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { Provider } from 'react-redux';
 
 import App from '~/components/App';
 import { PWAContextProvider } from '~/contexts/PWAContext';
-import { store } from '~/redux/store';
+
+// import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const container = document.getElementById('root');
 if (container) {
@@ -23,9 +22,7 @@ if (container) {
     <StrictMode>
       <PWAContextProvider>
         <QueryClientProvider client={queryClient}>
-          <Provider store={store}>
-            <App />
-          </Provider>
+          <App />
         </QueryClientProvider>
       </PWAContextProvider>
     </StrictMode>,

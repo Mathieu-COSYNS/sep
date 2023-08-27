@@ -4,8 +4,6 @@ import { IonCard, IonCardHeader, IonCardTitle, useIonRouter } from '@ionic/react
 import { removeDecimalZeros } from '~/utils/math';
 import Accordions from '~/components/Accordions';
 import ListItem from '~/components/ListItem';
-import { loadSaleIntoBasket } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
 import { Sale } from '~/types/Sale';
 import classes from '../Stock/Stock.module.scss';
 
@@ -14,15 +12,13 @@ export interface SaleItemProps {
 }
 
 const SaleItem: FC<SaleItemProps> = ({ sale }) => {
-  const dispatch = useAppDispatch();
   const router = useIonRouter();
 
   const nbrOfItems = sale.items.length;
   const nbrOfProducts = sale.items.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleEditButtonClick = () => {
-    dispatch(loadSaleIntoBasket(sale));
-    router.push('/ventes/pannier/');
+    router.push(`/ventes/${sale.id}/`);
   };
 
   return (

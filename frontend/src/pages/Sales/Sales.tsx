@@ -6,19 +6,15 @@ import { capitalize } from 'lodash';
 import { downloadSalesReport, saleApi } from '~/api/saleAPI';
 import Page from '~/components/Page';
 import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
-import { initializeNewSale } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
 import shared_classes from '../shared.module.scss';
 import SaleItem from './SaleItem';
 import SaleLoading from './SaleLoading';
 
 const Sales: FC = () => {
-  const dispatch = useAppDispatch();
   const router = useIonRouter();
 
   const handleAddButtonClick = () => {
-    dispatch(initializeNewSale());
-    router.push('/ventes/scanner/');
+    router.push('/ventes/ajouter/scanner/');
   };
 
   const handleDownloadReportButtonClick = () => {
