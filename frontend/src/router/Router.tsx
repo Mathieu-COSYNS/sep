@@ -6,22 +6,18 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import LeavePrompt from '~/components/LeavePrompt';
 import Menu from '~/components/Menu';
 import { useAuth } from '~/hooks/useAuth';
-import Basket from '~/pages/Basket';
 import Entries from '~/pages/Entries';
 import { NotFound } from '~/pages/ErrorPages';
 import Login from '~/pages/Login';
 import Packs from '~/pages/Packs';
 import QrCode from '~/pages/QrCode';
 import Sales from '~/pages/Sales';
-import Scanner from '~/pages/Scanner';
 import Stock from '~/pages/Stock/Stock';
-import { initializeNewSale } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
+import { BasketRouter } from './BasketRouter';
 import RestrictedRoute, { AccessLevel } from './RestrictedRoute';
 
 const Router: FC = () => {
   const { user } = useAuth();
-  const dispatch = useAppDispatch();
   const [leaveConfirmMessage, setLeaveConfirmMessage] = useState<string>();
   const confirmCallback = useRef<(ok: boolean) => void>();
 
@@ -29,10 +25,7 @@ const Router: FC = () => {
     <IonReactRouter
       getUserConfirmation={(message, callback) => {
         setLeaveConfirmMessage(message);
-        confirmCallback.current = (ok: boolean) => {
-          if (ok) dispatch(initializeNewSale());
-          callback(ok);
-        };
+        confirmCallback.current = callback;
       }}
     >
       <IonSplitPane contentId="main">
@@ -65,28 +58,8 @@ const Router: FC = () => {
             <RestrictedRoute path="/ventes/" accessLevel={AccessLevel.AUTHENTICATED} exact={true} strict={true}>
               <Sales />
             </RestrictedRoute>
-            <RestrictedRoute path="/ventes/pannier/" accessLevel={AccessLevel.AUTHENTICATED} exact={true} strict={true}>
-              <Basket />
-            </RestrictedRoute>
-            <RestrictedRoute path="/ventes/scanner/" accessLevel={AccessLevel.AUTHENTICATED} exact={true} strict={true}>
-              <Scanner />
-            </RestrictedRoute>
-            <RestrictedRoute
-              path="/ventes/:id/pannier/"
-              accessLevel={AccessLevel.AUTHENTICATED}
-              component={Basket}
-              exact={true}
-              strict={true}
-            >
-              <Basket />
-            </RestrictedRoute>
-            <RestrictedRoute
-              path="/ventes/:id/scanner/"
-              accessLevel={AccessLevel.AUTHENTICATED}
-              exact={true}
-              strict={true}
-            >
-              <Scanner />
+            <RestrictedRoute path="/ventes/:id(ajouter|\d+)/" accessLevel={AccessLevel.AUTHENTICATED} strict={true}>
+              <BasketRouter />
             </RestrictedRoute>
             <RestrictedRoute path="/entrees/" accessLevel={AccessLevel.AUTHENTICATED} exact={true} strict={true}>
               <Entries />
@@ -97,7 +70,9 @@ const Router: FC = () => {
               strict={false}
               render={() => (user ? <Redirect to="/stock/" /> : <Redirect to="/connexion/" />)}
             />
-            <Route component={NotFound} exact={false} strict={false} />
+            <Route exact={false} strict={false}>
+              <NotFound />
+            </Route>
           </Switch>
         </IonRouterOutlet>
       </IonSplitPane>

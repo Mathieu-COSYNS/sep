@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { AlertButton, IonAlert } from '@ionic/react';
 
-import { removeItemByProductId, removeOneProductById } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
+import { useBasketStore } from '~/store/basketStore';
 import { EditableSaleItem } from '~/types/SaleItem';
 
 export interface BasketRemoveItemProps {
@@ -11,8 +10,7 @@ export interface BasketRemoveItemProps {
 }
 
 const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss }) => {
-  const dispatch = useAppDispatch();
-
+  const { addProduct, removeProduct } = useBasketStore();
   const buttons: (string | AlertButton)[] = [];
 
   if (saleItem) {
@@ -22,7 +20,7 @@ const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss })
         role: 'destructive',
         handler: () => {
           if (saleItem) {
-            dispatch(removeOneProductById(saleItem.product.id));
+            addProduct({ quantity: -1, product: saleItem.product });
           }
         },
       });
@@ -34,7 +32,7 @@ const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss })
         role: 'destructive',
         handler: () => {
           if (saleItem) {
-            dispatch(removeItemByProductId(saleItem.product.id));
+            removeProduct(saleItem.product);
           }
         },
       },

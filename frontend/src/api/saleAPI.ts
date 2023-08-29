@@ -6,7 +6,7 @@ import { CRUDApi } from './_API';
 
 export const saleApi = new CRUDApi<Sale, EditableSale>('sales', (data: EditableSale) => {
   const obj: { payment_method?: number; items: { quantity: number; product: Id }[] } = {
-    items: data.items.map((item) => ({ product: item.product.id, quantity: item.quantity })),
+    items: Object.values(data.items).map((item) => ({ product: item.product.id, quantity: item.quantity })),
   };
 
   if (data.payment_method?.id) obj['payment_method'] = data.payment_method.id;

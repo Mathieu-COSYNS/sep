@@ -7,6 +7,8 @@ export const serializeError = (e: unknown): string => {
     return e.message;
   } else if (e instanceof Error) {
     return e.toString();
+  } else if (typeof e === 'string') {
+    return e;
   } else {
     return JSON.stringify(e);
   }

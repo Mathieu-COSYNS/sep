@@ -3,8 +3,7 @@ import { IonAlert } from '@ionic/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { paymentMethodAPI } from '~/api/paymentMethodAPI';
-import { setPaymentMethod, useBasket } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
+import { useBasketStore } from '~/store/basketStore';
 
 export interface PaymentPromptProps {
   open: boolean;
@@ -14,8 +13,7 @@ export interface PaymentPromptProps {
 
 const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish }) => {
   const [closing, setClosing] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const basket = useBasket();
+  const { basket, setPaymentMethod } = useBasketStore();
   const paymentMethods = useQuery(['paymentMethods/all'], paymentMethodAPI.fetchAll);
 
   const autoSelectPayment =
@@ -23,13 +21,13 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
 
   useEffect(() => {
     if (open && autoSelectPayment) {
-      if (basket.data?.editable.payment_method?.id === autoSelectPayment.id) {
+      if (basket.payment_method?.id === autoSelectPayment.id) {
         onDidFinish();
       } else {
-        dispatch(setPaymentMethod(autoSelectPayment));
+        setPaymentMethod(autoSelectPayment);
       }
     }
-  }, [open, autoSelectPayment, dispatch, onDidFinish, basket.data?.editable.payment_method?.id]);
+  }, [autoSelectPayment, basket.payment_method, onDidFinish, open, setPaymentMethod]);
 
   useEffect(() => {
     if (closing && open) onDidFinish();
@@ -56,7 +54,7 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
           type: 'radio',
           label: paymentMethod.name,
           value: paymentMethod.id,
-          checked: basket.data?.editable.payment_method?.id === paymentMethod.id,
+          checked: basket.payment_method?.id === paymentMethod.id,
         })) ?? []
       }
       buttons={[
@@ -70,7 +68,7 @@ const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish
             if (paymentMethods.data) {
               const paymentMethod = paymentMethods.data.find((paymentMethod) => paymentMethod.id === value);
               if (paymentMethod) {
-                dispatch(setPaymentMethod(paymentMethod));
+                setPaymentMethod(paymentMethod);
                 setClosing(true);
               }
             } else {

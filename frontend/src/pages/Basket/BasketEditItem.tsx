@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { IonAlert } from '@ionic/react';
 
-import { updateProductQuantity } from '~/redux/basketSlice';
-import { useAppDispatch } from '~/redux/hooks';
+import { useBasketStore } from '~/store/basketStore';
 import { EditableSaleItem } from '~/types/SaleItem';
 
 export interface BasketRemoveItemProps {
@@ -11,7 +10,7 @@ export interface BasketRemoveItemProps {
 }
 
 const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss }) => {
-  const dispatch = useAppDispatch();
+  const { setProduct } = useBasketStore();
 
   return (
     <IonAlert
@@ -40,7 +39,7 @@ const BasketRemoveItem: FC<BasketRemoveItemProps> = ({ saleItem, onDidDismiss })
             const quantity = parseInt(value.quantity);
             if (Number.isNaN(quantity)) return false;
             if (saleItem?.product.id) {
-              dispatch(updateProductQuantity({ productId: saleItem.product.id, quantity }));
+              setProduct({ product: saleItem.product, quantity });
             }
           },
         },

@@ -1,14 +1,18 @@
 import { FC } from 'react';
-import { Prompt } from 'react-router';
+import { Prompt, useLocation } from 'react-router';
 import { useBeforeUnload } from 'react-use';
 
-import { useIsBasketDirty } from '~/redux/basketSlice';
+import { useIsBasketDirty } from '~/store/basketStore';
+
+const basketLocations = RegExp(/^\/ventes\/(ajouter|\d+)\//);
 
 const LeavePrompt: FC = () => {
   const basketDirty = useIsBasketDirty();
-  const text = basketDirty
-    ? 'Êtes-vous sûr de vouloir quittez la page ? Les données du pannier ne seront pas sauvegardées.'
-    : undefined;
+  const location = useLocation();
+  const text =
+    basketDirty && location.pathname.match(basketLocations)
+      ? 'Êtes-vous sûr de vouloir quittez la page ? Les données du pannier ne seront pas sauvegardées.'
+      : undefined;
 
   useBeforeUnload(!!text, text);
 
@@ -16,7 +20,7 @@ const LeavePrompt: FC = () => {
     <Prompt
       when={!!text}
       message={(location) => {
-        if (location.pathname === '/ventes/pannier/' || location.pathname === '/ventes/scanner/') return true;
+        if (location.pathname.match(basketLocations)) return true;
         return text || '';
       }}
     />
