@@ -73,6 +73,7 @@ jobs:
       - name: "UI Tests - Chrome"
         uses: cypress-io/github-action@v5
         with:
+          working-directory: frontend
           start: npm run preview
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
