@@ -1,5 +1,11 @@
 name: Checks, Lints and Unit Tests
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - frontend/**
+  pull_request:
+    paths:
+      - frontend/**
 
 defaults:
   run:
