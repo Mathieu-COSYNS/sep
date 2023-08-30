@@ -39,7 +39,7 @@ jobs:
         with:
           name: build
           if-no-files-found: error
-          path: build
+          path: dist
 
   ui-chrome-tests:
     timeout-minutes: 15
@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: build
+          path: dist
 
       - name: __e Dir
         run: ls /__e
