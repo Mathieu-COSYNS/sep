@@ -6,6 +6,10 @@ defaults:
   run:
     working-directory: frontend
 
+env:
+  VITE_APP_API_URL: http://localhost:8000
+  VITE_APP_QR_CODE_URL: http://localhost:5173
+
 jobs:
   install:
     runs-on: ubuntu-latest
