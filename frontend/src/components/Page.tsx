@@ -74,7 +74,9 @@ main > slot{
               <IonMenuButton />
             )}
           </IonButtons>
-          <IonTitle>{title}</IonTitle>
+          <IonTitle className={classes.title}>
+            <span>{title}</span>
+          </IonTitle>
           {!hideLoginLogoutButton && (
             <IonButtons slot="end">
               {user ? (

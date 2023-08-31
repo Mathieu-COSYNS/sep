@@ -20,7 +20,6 @@ import classes from './Scanner.module.scss';
 
 const basketRoute = RegExp(/\/ventes\/(ajouter|\d+)\//);
 const newBasketRoute = RegExp(/\/ventes\/ajouter\//);
-const editBasketRoute = RegExp(/\/ventes\/\d+\//);
 const scannerRoute = RegExp(/\/ventes\/(ajouter|\d+)\/scanner\//);
 
 const base58 = new Base58();
@@ -55,10 +54,10 @@ const Scanner: FC = () => {
     if (data) {
       if ('products' in data) {
         for (const product of data.products) {
-          addProduct({ quantity: 1, product });
+          addProduct(product);
         }
       } else {
-        addProduct({ quantity: 1, product: data });
+        addProduct(data);
       }
       setCode(null);
       if (router.routeInfo.pushedByRoute?.match(basketRoute)) router.goBack();
@@ -102,10 +101,10 @@ const Scanner: FC = () => {
       backButton={true}
       defaultBackUrl={id ? `/ventes/${id}/` : '/ventes/'}
       backText={
-        router.routeInfo.pushedByRoute?.match(newBasketRoute)
-          ? 'Nouvelle Vente'
-          : router.routeInfo.pushedByRoute?.match(editBasketRoute)
+        id
           ? `Modifier la Vente ${id}`
+          : router.routeInfo.pushedByRoute?.match(newBasketRoute)
+          ? 'Nouvelle Vente'
           : 'Ventes'
       }
     >

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useToast } from '@agney/ir-toast';
-import { IonButton, IonFab, IonFabButton, IonIcon, IonItem, useIonLoading, useIonRouter } from '@ionic/react';
+import { IonButton, IonIcon, IonItem, useIonLoading, useIonRouter } from '@ionic/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
@@ -11,19 +11,14 @@ import Page from '~/components/Page';
 import StateAwareList from '~/components/StateAwareList';
 import { useIdParam } from '~/hooks/useIdParam';
 import { useBasketStore, useIsBasketDirty } from '~/store/basketStore';
-import { EditableSaleItem } from '~/types/SaleItem';
 import classes from './Basket.module.scss';
-import BasketEditItem from './BasketEditItem';
 import BasketItem from './BasketItem';
 import BasketLoading from './BasketLoading';
-import BasketRemoveItem from './BasketRemoveItem';
 import PaymentPrompt from './PaymentPrompt';
 
 const Basket: FC = () => {
   const { url } = useRouteMatch();
   const id = useIdParam();
-  const [editSaleItem, setEditSaleItem] = useState<EditableSaleItem | undefined>();
-  const [removeSaleItem, setRemoveSaleItem] = useState<EditableSaleItem | undefined>();
   const [showPaymentPrompt, setShowPaymentPrompt] = useState<boolean>(false);
   const [present, dismiss] = useIonLoading();
   const Toast = useToast();
@@ -34,14 +29,6 @@ const Basket: FC = () => {
   const isBasketDirty = useIsBasketDirty();
 
   const saveBasketMutation = useMutation({ mutationFn: saleApi.save });
-
-  const handleEditItemButtonClick = (saleItem: EditableSaleItem) => {
-    setEditSaleItem(saleItem);
-  };
-
-  const handleRemoveItemButtonClick = (saleItem: EditableSaleItem) => {
-    setRemoveSaleItem(saleItem);
-  };
 
   const handleSaveButtonClick = () => {
     setShowPaymentPrompt(true);
@@ -80,24 +67,24 @@ const Basket: FC = () => {
       backText={'Ventes'}
     >
       <div className={classes.basket}>
-        <p>Total: {basket.total}€</p>
         <StateAwareList
           state={{
             isLoading: (data?.id ?? null) !== id,
             items: Object.values(basket.items),
             error: (data?.id ?? null) !== id ? 'Impossible de le panier' : undefined,
           }}
-          renderItem={(saleItem) => (
-            <BasketItem
-              saleItem={saleItem}
-              onEditButtonClick={handleEditItemButtonClick.bind(this, saleItem)}
-              onRemoveButtonClick={handleRemoveItemButtonClick.bind(this, saleItem)}
-            />
-          )}
+          renderItem={(saleItem) => <BasketItem saleItem={saleItem} />}
           keyResolver={(saleItem) => `${saleItem.product.id}`}
           loadingComponent={<BasketLoading />}
           emptyComponent={'Le panier est vide'}
           renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}
+          toolbarText={`Total: ${basket.total}€`}
+          toolbarButtons={[
+            <IonButton routerLink={`${url}scanner/`} key="1" fill="clear" shape="round">
+              <IonIcon slot="start" ios={qrCodeOutline} md={qrCodeSharp} aria-hidden />
+              Scan un QR Code
+            </IonButton>,
+          ]}
         />
         <div className={classes.save_btn}>
           <IonButton expand="block" onClick={handleSaveButtonClick} disabled={Object.keys(basket.items).length === 0}>
@@ -105,18 +92,11 @@ const Basket: FC = () => {
           </IonButton>
         </div>
       </div>
-      <BasketEditItem saleItem={editSaleItem} onDidDismiss={() => setEditSaleItem(undefined)} />
-      <BasketRemoveItem saleItem={removeSaleItem} onDidDismiss={() => setRemoveSaleItem(undefined)} />
       <PaymentPrompt
         open={showPaymentPrompt}
         onDidDismiss={handlePaymentPromptDismiss}
         onDidFinish={handlePaymentPromptFinish}
       />
-      <IonFab className={classes.scanner_btn} vertical="bottom" horizontal="end" slot="fixed">
-        <IonFabButton routerLink={`${url}scanner/`} aria-label="Scan un QRcode">
-          <IonIcon ios={qrCodeOutline} md={qrCodeSharp} aria-hidden />
-        </IonFabButton>
-      </IonFab>
     </Page>
   );
 };

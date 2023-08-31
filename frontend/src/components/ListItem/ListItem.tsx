@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useRef } from 'react';
 import { Color } from '@ionic/core/dist/types/interface';
-import { IonButton, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel } from '@ionic/react';
+import { IonButton, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding } from '@ionic/react';
 import { pencilOutline, pencilSharp, trashBinOutline, trashBinSharp } from 'ionicons/icons';
 
 import useBreakpoints from '~/hooks/useBreakpoints';
@@ -85,32 +85,32 @@ const ListItem: FC<ListItemProps> = ({
     >
       <IonItem className={classes.ion_item}>
         <div>
-          <IonLabel className={classes.ion_label}>
-            <div className={classes.content}>
-              <div>{children}</div>
-              {buttons.map((button) => (
-                <IonButton
-                  key={button.id}
-                  className={classes.button}
-                  onClick={button.onClick}
-                  color={button.color}
-                  aria-label={button.label}
-                >
-                  <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
-                </IonButton>
-              ))}
-            </div>
-          </IonLabel>
+          <div className={classes.content}>
+            <div>{children}</div>
+            {buttons.map((button) => (
+              <IonButton
+                key={button.id}
+                className={classes.button}
+                onClick={button.onClick}
+                color={button.color}
+                aria-label={button.label}
+              >
+                <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
+              </IonButton>
+            ))}
+          </div>
           {after}
         </div>
       </IonItem>
-      <IonItemOptions side="end">
-        {buttons.map((button) => (
-          <IonItemOption key={button.id} onClick={button.onClick} color={button.color} aria-label={button.label}>
-            <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
-          </IonItemOption>
-        ))}
-      </IonItemOptions>
+      {buttons.length !== 0 && (
+        <IonItemOptions side="end">
+          {buttons.map((button) => (
+            <IonItemOption key={button.id} onClick={button.onClick} color={button.color} aria-label={button.label}>
+              <IonIcon slot="icon-only" ios={button.iosIcon} md={button.mdIcon} aria-hidden />
+            </IonItemOption>
+          ))}
+        </IonItemOptions>
+      )}
     </IonItemSliding>
   );
 };

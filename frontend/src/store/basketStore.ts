@@ -11,9 +11,8 @@ interface BasketStore {
   basket: EditableSale;
   loadSale: (sale: Sale) => void;
   reset: () => void;
-  addProduct: (item: EditableSaleItem) => void;
-  setProduct: (item: EditableSaleItem) => void;
-  removeProduct: (product: EditableSaleItem['product']) => void;
+  addProduct: (product: EditableSaleItem['product'], quantity?: EditableSaleItem['quantity']) => void;
+  setProduct: (product: EditableSaleItem['product'], quantity: EditableSaleItem['quantity']) => void;
   setPaymentMethod: (payment_method: PaymentMethod) => void;
 }
 
@@ -25,17 +24,26 @@ const calculateTotal = (sale: EditableSale) => {
   }`;
 };
 
-const setItemQuantity = (sale: EditableSale, item: EditableSaleItem) => {
+const setProductQuantity = (
+  sale: EditableSale,
+  product: EditableSaleItem['product'],
+  quantity: EditableSaleItem['quantity'],
+) => {
   const items = { ...sale.items };
-  if (item.quantity > 0) items[item.product.id] = item;
-  else delete items[item.product.id];
+  if (quantity > 0) items[product.id] = { product, quantity };
+  else delete items[product.id];
+
   const newSale = { ...sale, items };
   return { ...newSale, total: calculateTotal(newSale) };
 };
 
-const addItemQuantity = (sale: EditableSale, item: EditableSaleItem) => {
-  const quantity = sale.items[item.product.id]?.quantity ?? 0;
-  return setItemQuantity(sale, { ...item, quantity: item.quantity + quantity });
+const addProductQuantity = (
+  sale: EditableSale,
+  product: EditableSaleItem['product'],
+  quantity: EditableSaleItem['quantity'],
+) => {
+  const oldQuantity = sale.items[product.id]?.quantity ?? 0;
+  return setProductQuantity(sale, product, oldQuantity + quantity);
 };
 
 export const useBasketStore = create<BasketStore>()(
@@ -43,7 +51,7 @@ export const useBasketStore = create<BasketStore>()(
     (set) => ({
       initialBasket: initSale(),
       basket: initSale(),
-      loadSale: (sale: Sale) =>
+      loadSale: (sale) =>
         set(
           () => {
             const formattedItems: EditableSale['items'] = {};
@@ -70,17 +78,11 @@ export const useBasketStore = create<BasketStore>()(
           false,
           'reset',
         ),
-      addProduct: (item: EditableSaleItem) =>
-        set(({ basket: sale }) => ({ basket: addItemQuantity(sale, item) }), false, 'addProduct'),
-      setProduct: (item: EditableSaleItem) =>
-        set(({ basket: sale }) => ({ basket: setItemQuantity(sale, item) }), false, 'setProduct'),
-      removeProduct: (product: EditableSaleItem['product']) =>
-        set(
-          ({ basket: sale }) => ({ basket: setItemQuantity(sale, { product, quantity: 0 }) }),
-          false,
-          'removeProduct',
-        ),
-      setPaymentMethod: (payment_method: PaymentMethod) =>
+      addProduct: (product, quantity = 1) =>
+        set(({ basket: sale }) => ({ basket: addProductQuantity(sale, product, quantity) }), false, 'addProduct'),
+      setProduct: (product, quantity) =>
+        set(({ basket: sale }) => ({ basket: setProductQuantity(sale, product, quantity) }), false, 'setProduct'),
+      setPaymentMethod: (payment_method) =>
         set(({ basket: sale }) => ({ basket: { ...sale, payment_method } }), false, 'setPaymentMethod'),
     }),
     { name: 'Basket Store' },

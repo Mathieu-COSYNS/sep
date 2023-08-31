@@ -3,9 +3,15 @@
 
   p {
     margin: 0;
-    padding: 0.5em 1em;
+    padding: 0.6em 1em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+:global(.ios) {
+  .group p {
+    padding: 1em 1em 0.6em;
   }
 }

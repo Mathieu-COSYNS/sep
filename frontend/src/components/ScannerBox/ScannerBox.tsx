@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { useToast } from '@agney/ir-toast';
 import { IonButton, IonIcon, IonSpinner } from '@ionic/react';
-import { cloudUpload } from 'ionicons/icons';
+import { cloudUploadOutline, cloudUploadSharp } from 'ionicons/icons';
 import { usePageVisibility } from 'react-page-visibility';
 import QrReader from 'react-qr-reader';
 import { useLocation } from 'react-router';
@@ -116,7 +116,7 @@ const ScannerBox: React.FC<{
           <div>
             <p>Aucun accès à la caméra</p>
             <IonButton type="button" onClick={openImageDialog}>
-              <IonIcon icon={cloudUpload} slot="start" aria-hidden />
+              <IonIcon ios={cloudUploadOutline} md={cloudUploadSharp} slot="start" aria-hidden />
               Ajouter une image
             </IonButton>
           </div>

@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useMemo, useState } from 'react';
-import { IonButton, IonButtons, IonIcon, IonItem, IonList, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonIcon, IonItem, IonList, IonTitle, IonToolbar } from '@ionic/react';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
 import { GroupedVirtuoso, Virtuoso } from 'react-virtuoso';
@@ -18,6 +18,7 @@ export interface StateAwareListProps<Item> {
     error?: unknown;
     items?: Item[];
   };
+  toolbarText?: string;
   toolbarButtons?: ReactNode[];
   loadingComponent: ReactNode;
   numberOfLoadingComponents?: number;
@@ -31,6 +32,7 @@ export interface StateAwareListProps<Item> {
 }
 
 const StateAwareList = <Item,>({
+  toolbarText,
   toolbarButtons,
   loadingComponent,
   numberOfLoadingComponents = 5,
@@ -94,18 +96,25 @@ const StateAwareList = <Item,>({
 
   return (
     <>
-      {!minBreakpoint('md') && !!onRefresh && (
-        <Refresher isLoading={state.isLoading || state.isRefetching || false} onRefresh={onRefresh} disabled={!atTop} />
-      )}
       {!!toolbarButtons && toolbarButtons.length > 0 && (
         <IonToolbar color="light">
-          <IonButtons slot="start">{toolbarButtons}</IonButtons>
+          {toolbarText && <IonTitle slot="start">{toolbarText}</IonTitle>}
+          <IonButtons slot={toolbarText ? 'end' : 'start'}>{toolbarButtons}</IonButtons>
         </IonToolbar>
       )}
       <div className={classes.container}>
         <div style={{ position: 'relative' }}>
           <LoadingBar show={state.isLoading || state.isRefetching || false} />
-          <IonList style={{ height: '100%' }}>{content}</IonList>
+          <IonContent>
+            {!minBreakpoint('md') && !!onRefresh && (
+              <Refresher
+                isLoading={state.isLoading || state.isRefetching || false}
+                onRefresh={onRefresh}
+                disabled={!atTop}
+              />
+            )}
+            <IonList style={{ height: '100%' }}>{content}</IonList>
+          </IonContent>
         </div>
       </div>
     </>

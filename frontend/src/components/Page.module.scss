@@ -8,3 +8,14 @@
     }
   }
 }
+
+:global(.ios) .title {
+  z-index: 100;
+
+  span {
+    /* fix IOS overlapping back button text */
+    padding-inline: 0.5em;
+    background-color: var(--ion-toolbar-background, var(--ion-color-step-50, #f7f7f7));
+    box-shadow: 0 0 5px 5px var(--ion-toolbar-background, var(--ion-color-step-50, #f7f7f7));
+  }
+}
