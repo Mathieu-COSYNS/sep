@@ -30,7 +30,6 @@ const PackItem: FC<PackItemProps> = ({ pack, onQrCodeButtonClick }) => {
   return (
     <IonCard>
       <ListItem
-        key={pack.id}
         card={true}
         customButtons={customButtons}
         after={

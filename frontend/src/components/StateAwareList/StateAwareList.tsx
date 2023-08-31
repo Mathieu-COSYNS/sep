@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useMemo, useState } from 'react';
+import { Fragment, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { IonButton, IonButtons, IonContent, IonIcon, IonItem, IonList, IonTitle, IonToolbar } from '@ionic/react';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
@@ -68,7 +68,7 @@ const StateAwareList = <Item,>({
     } else {
       const data = state.items;
       const commonVirtuosoProps = {
-        itemContent: (index: number) => renderItem(data[index]),
+        itemContent: (index: number) => <Fragment key={keyResolver(data[index])}>{renderItem(data[index])}</Fragment>,
         computeItemKey: (index: number, item: Item) => (item ? keyResolver(item) : index),
         atTopStateChange: (atTop: boolean) => setAtTop(atTop),
       };

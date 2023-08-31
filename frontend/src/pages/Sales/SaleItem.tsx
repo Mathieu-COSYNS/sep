@@ -24,7 +24,6 @@ const SaleItem: FC<SaleItemProps> = ({ sale }) => {
   return (
     <IonCard>
       <ListItem
-        key={sale.id}
         card={true}
         after={
           <Accordions

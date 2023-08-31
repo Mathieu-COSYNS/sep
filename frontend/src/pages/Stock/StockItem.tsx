@@ -31,7 +31,6 @@ const BasketList: FC<BasketListProps> = ({ product, onQrCodeButtonClick /*onEdit
   return (
     <IonCard>
       <ListItem
-        key={product.id}
         card={true}
         // onClickEditButton={onEditButtonClick.bind(this, product)}
         customButtons={customButtons}
