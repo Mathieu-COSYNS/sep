@@ -20,6 +20,7 @@ from .serializers import WriteEntrySerializer
 from .serializers import WriteSaleSerializer
 from .serializers import WritePackSerializer
 from .models import Entry, Pack, PaymentMethod, Product, Sale
+from .pagination import CreatedDateCursorPagination, MultiplePaginationMixin
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -48,12 +49,19 @@ class EntryViewSet(ReadWriteSerializerViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class SaleViewSet(ReadWriteSerializerViewSet):
+class SaleViewSet(MultiplePaginationMixin, ReadWriteSerializerViewSet):
     queryset = Sale.objects.filter(
         deleted_date__isnull=True).prefetch_related('items', 'sale_to_product')
     read_serializer_class = ReadSaleSerializer
     write_serializer_class = WriteSaleSerializer
     permission_classes = [IsAuthenticated]
+
+    # Overridden in get_pagination_class but kept for OpenAPI Specs
+    pagination_class = CreatedDateCursorPagination
+
+    def get_pagination_class(self):
+        if self.request.GET.get('cursor') != None:
+            return CreatedDateCursorPagination
 
 
 @api_view(['GET'])

@@ -10,7 +10,7 @@ class OASSchemaGenerator(SchemaGenerator):
     def get_schema(self, request, public):
         schema = super().get_schema(request, public)
         schema['info'] = {
-            'version': '1.0',
+            'version': '1.1',
             'title': 'SEP API',
         }
         protocol = 'https' if request.is_secure() else 'http'
