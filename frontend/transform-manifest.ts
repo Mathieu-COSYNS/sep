@@ -31,6 +31,15 @@ export default function transformManifest(config?: TransformManifestConfig): Plu
 
       const content = JSON.parse(await readFile(file, 'utf-8'));
 
+      for (const key in transformManifestConfig.extraContent) {
+        const value = transformManifestConfig.extraContent[key];
+        if (Array.isArray(value)) {
+          if (key in content && Array.isArray(content[key])) {
+            transformManifestConfig.extraContent[key] = [...content[key], ...value];
+          }
+        }
+      }
+
       await writeFile(file, JSON.stringify({ ...content, ...transformManifestConfig.extraContent }));
     },
   };
