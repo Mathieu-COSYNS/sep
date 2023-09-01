@@ -2,7 +2,7 @@ from rest_framework.pagination import CursorPagination
 
 
 class CreatedDateCursorPagination(CursorPagination):
-    page_size = 50
+    page_size = 100
     ordering = '-created_date'
 
 
