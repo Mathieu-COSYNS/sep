@@ -1,5 +1,15 @@
 import { Fragment, ReactElement, ReactNode, useMemo, useState } from 'react';
-import { IonButton, IonButtons, IonContent, IonIcon, IonItem, IonList, IonTitle, IonToolbar } from '@ionic/react';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonList,
+  IonSpinner,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react';
 import { refreshOutline, refreshSharp } from 'ionicons/icons';
 import { groupBy } from 'lodash';
 import { GroupedVirtuoso, Virtuoso } from 'react-virtuoso';
@@ -11,7 +21,13 @@ import useBreakpoints from '~/hooks/useBreakpoints';
 import Empty from './Empty';
 import classes from './StateAwareList.module.scss';
 
-export interface StateAwareListProps<Item> {
+type Context = {
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  loadMore?: () => void;
+};
+
+export type StateAwareListProps<Item> = {
   state: {
     isLoading: boolean;
     isRefetching?: boolean;
@@ -29,7 +45,7 @@ export interface StateAwareListProps<Item> {
   groupResolver?: (item: Item) => string;
   renderGroup?: (group: string, items: Item[]) => ReactNode;
   onRefresh?: () => void;
-}
+} & Context;
 
 const StateAwareList = <Item,>({
   toolbarText,
@@ -44,6 +60,9 @@ const StateAwareList = <Item,>({
   groupResolver,
   renderGroup,
   onRefresh,
+  hasMore,
+  isLoadingMore,
+  loadMore,
 }: StateAwareListProps<Item>): ReactElement => {
   const { minBreakpoint } = useBreakpoints();
   const [atTop, setAtTop] = useState(true);
@@ -57,9 +76,7 @@ const StateAwareList = <Item,>({
   }
 
   if (!content && state.error) {
-    content = renderError?.(state.error) ?? (
-      <IonItem>Error: {JSON.stringify(serializeError(state.error), undefined, 2)}</IonItem>
-    );
+    content = renderError?.(state.error) ?? <IonItem>Error: {serializeError(state.error)}</IonItem>;
   }
 
   if (!content) {
@@ -71,6 +88,10 @@ const StateAwareList = <Item,>({
         itemContent: (index: number) => <Fragment key={keyResolver(data[index])}>{renderItem(data[index])}</Fragment>,
         computeItemKey: (index: number, item: Item) => (item ? keyResolver(item) : index),
         atTopStateChange: (atTop: boolean) => setAtTop(atTop),
+        overscan: loadMore ? 200 : 50,
+        endReached: loadMore,
+        context: { hasMore, isLoadingMore, loadMore },
+        components: { Footer },
       };
       content =
         groupResolver && renderGroup ? (
@@ -118,6 +139,21 @@ const StateAwareList = <Item,>({
         </div>
       </div>
     </>
+  );
+};
+
+const Footer = ({ context }: { context?: Context }) => {
+  if (!context) return null;
+
+  const { hasMore, isLoadingMore, loadMore } = context;
+
+  if (typeof isLoadingMore === 'undefined') return null;
+  if (!hasMore) return null;
+
+  return (
+    <div style={{ height: 60, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      {isLoadingMore ? <IonSpinner name="dots" /> : <IonButton onClick={() => loadMore?.()}>Charger plus</IonButton>}
+    </div>
   );
 };
 

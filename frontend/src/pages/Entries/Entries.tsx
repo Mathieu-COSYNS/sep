@@ -3,7 +3,7 @@ import { capitalize } from 'lodash';
 
 import { entriesApi } from '~/api/entriesAPI';
 import Page from '~/components/Page';
-import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
+import { ReactQueryStateAwareList } from '~/components/StateAwareList';
 import shared_classes from '../shared.module.scss';
 import EntryItem from './EntryItem';
 import EntryLoading from './EntryLoading';

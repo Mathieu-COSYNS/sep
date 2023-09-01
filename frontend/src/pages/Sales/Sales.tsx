@@ -1,11 +1,13 @@
 import { FC } from 'react';
-import { IonButton, IonIcon, IonItem, useIonRouter } from '@ionic/react';
+import { IonButton, IonIcon, useIonRouter } from '@ionic/react';
 import { addOutline, addSharp, downloadOutline, downloadSharp } from 'ionicons/icons';
 import { capitalize } from 'lodash';
 
-import { downloadSalesReport, saleApi } from '~/api/saleAPI';
+import { downloadSalesReport } from '~/api/saleAPI';
 import Page from '~/components/Page';
-import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
+import { ReactQueryInfiniteStateAwareList } from '~/components/StateAwareList';
+import environment from '~/environment';
+import { Sale } from '~/types/Sale';
 import shared_classes from '../shared.module.scss';
 import SaleItem from './SaleItem';
 import SaleLoading from './SaleLoading';
@@ -23,8 +25,24 @@ const Sales: FC = () => {
 
   return (
     <Page title="Ventes">
-      <ReactQueryStateAwareList
-        reactQueryOptions={{ queryKey: ['sales/all'], queryFn: saleApi.fetchAll }}
+      <ReactQueryInfiniteStateAwareList
+        reactInfiniteQueryOptions={{
+          queryKey: ['sales-with-cursor'],
+          queryFn: async ({ pageParam }) => {
+            const resp = await fetch(pageParam ?? `${environment.API_URL}/sales/?cursor=`, {
+              method: 'GET',
+              headers: new Headers({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              }),
+            });
+            if (resp.status >= 400) throw new Error(`${resp.status} ${resp.statusText}`);
+            return (await resp.json()) as { previous: string | null; next: string | null; results: Sale[] };
+          },
+          getPreviousPageParam: (page) => page.previous,
+          getNextPageParam: (page) => page.next,
+        }}
+        getPageContent={(page) => page.results}
         toolbarButtons={[
           <IonButton key="1" fill="clear" shape="round" onClick={handleAddButtonClick}>
             <IonIcon slot="start" ios={addOutline} md={addSharp} aria-hidden />
@@ -39,7 +57,6 @@ const Sales: FC = () => {
         keyResolver={(sale) => `${sale.id}`}
         loadingComponent={<SaleLoading />}
         emptyComponent={'Aucune Vente'}
-        renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}
         groupResolver={(sale) =>
           capitalize(
             new Date(sale.created_date).toLocaleDateString('fr-BE', {

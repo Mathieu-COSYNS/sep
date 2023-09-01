@@ -4,7 +4,7 @@ import { useIonRouter } from '@ionic/react';
 import { Base58 } from '~/utils/base58';
 import { packApi } from '~/api/packAPI';
 import Page from '~/components/Page';
-import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
+import { ReactQueryStateAwareList } from '~/components/StateAwareList';
 import { Pack } from '~/types/Pack';
 import PackItem from './PackItem';
 import PackLoading from './PackLoading';

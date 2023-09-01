@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useToast } from '@agney/ir-toast';
-import { IonButton, IonIcon, IonItem, useIonLoading, useIonRouter } from '@ionic/react';
+import { IonButton, IonIcon, useIonLoading, useIonRouter } from '@ionic/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { qrCodeOutline, qrCodeSharp } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
@@ -77,7 +77,6 @@ const Basket: FC = () => {
           keyResolver={(saleItem) => `${saleItem.product.id}`}
           loadingComponent={<BasketLoading />}
           emptyComponent={'Le panier est vide'}
-          renderError={(error) => <IonItem>Error: {JSON.stringify(error, undefined, 2)}</IonItem>}
           toolbarText={`Total: ${basket.total}€`}
           toolbarButtons={[
             <IonButton routerLink={`${url}scanner/`} key="1" fill="clear" shape="round">

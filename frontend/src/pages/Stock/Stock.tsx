@@ -4,7 +4,7 @@ import { useIonRouter } from '@ionic/react';
 import { Base58 } from '~/utils/base58';
 import { productApi } from '~/api/productAPI';
 import Page from '~/components/Page';
-import { ReactQueryStateAwareList } from '~/components/ReactQueryStateAwareList';
+import { ReactQueryStateAwareList } from '~/components/StateAwareList';
 import { Product } from '~/types/Product';
 import StockItem from './StockItem';
 import StockLoading from './StockLoading';
