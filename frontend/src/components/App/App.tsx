@@ -1,11 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { ToastProvider } from '@agney/ir-toast';
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { CSSTransition } from 'react-transition-group';
 
 import LoadingBar from '~/components/LoadingBar';
 import WaitingServerConnection from '~/pages/WaitingServerConnection';
-import Router from '~/router/Router';
 
 import '~/theme/index.scss';
 
@@ -17,6 +16,8 @@ import { useBannerStore } from '~/store/bannerStore';
 import classes from './App.module.scss';
 
 setupIonicReact();
+
+const Router = lazy(() => import('~/router/Router'));
 
 const App: React.FC = () => {
   const { showUpdateAvailable } = usePWAContext();
@@ -58,7 +59,15 @@ const App: React.FC = () => {
         </div>
       </CSSTransition>
       <IonApp className={classes.ion_app} style={{ top: banner ? '1.5rem' : '0' }}>
-        <ToastProvider value={{ duration: 2000 }}>{isLoading ? <WaitingServerConnection /> : <Router />}</ToastProvider>
+        <ToastProvider value={{ duration: 2000 }}>
+          {isLoading ? (
+            <WaitingServerConnection />
+          ) : (
+            <Suspense fallback={<WaitingServerConnection />}>
+              <Router />
+            </Suspense>
+          )}
+        </ToastProvider>
       </IonApp>
     </>
   );
