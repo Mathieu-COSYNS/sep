@@ -132,6 +132,10 @@ module.exports = {
         ],
       },
       {
+        // Images
+        properties: ['object-fit', 'object-position', 'aspect-ratio'],
+      },
+      {
         // Typography.
         properties: [
           'font',

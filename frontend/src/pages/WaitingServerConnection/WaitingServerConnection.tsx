@@ -8,7 +8,7 @@ const WaitingServerConnection: FC = () => {
   return (
     <EmptyPage>
       <div className={classes.container}>
-        <img className={classes.main_image} src="/assets/data_center.svg" />
+        <img className={classes.main_image} src="/assets/data_center.svg" alt="Server" />
         <div>
           <h2>Connexion au serveur</h2>
           <IonNote>
