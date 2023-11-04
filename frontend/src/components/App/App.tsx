@@ -4,7 +4,7 @@ import { IonApp, setupIonicReact } from '@ionic/react';
 import { CSSTransition } from 'react-transition-group';
 
 import LoadingBar from '~/components/LoadingBar';
-import WaitingServerConnection from '~/pages/WaitingServerConnection';
+import ServerConnection from '~/pages/ServerConnection';
 
 import '~/theme/index.scss';
 
@@ -21,7 +21,7 @@ const Router = lazy(() => import('~/router/Router'));
 
 const App: React.FC = () => {
   const { showUpdateAvailable } = usePWAContext();
-  const { isLoading } = useAuth();
+  const { isLoading, error } = useAuth();
   const { getBanner, addOfflineBanner, addUpdateAvailableBanner, removeOfflineBanner, removeUpdateAvailableBanner } =
     useBannerStore();
   const banner = getBanner();
@@ -44,6 +44,8 @@ const App: React.FC = () => {
     }
   }, [addUpdateAvailableBanner, removeUpdateAvailableBanner, showUpdateAvailable]);
 
+  console.log({ error });
+
   return (
     <>
       <LoadingBar show={isLoading} />
@@ -60,13 +62,9 @@ const App: React.FC = () => {
       </CSSTransition>
       <IonApp className={classes.ion_app} style={{ top: banner ? '1.5rem' : '0' }}>
         <ToastProvider value={{ duration: 2000 }}>
-          {isLoading ? (
-            <WaitingServerConnection />
-          ) : (
-            <Suspense fallback={<WaitingServerConnection />}>
-              <Router />
-            </Suspense>
-          )}
+          <Suspense fallback={<ServerConnection />}>
+            {isLoading || error ? <ServerConnection status={error ? 'failed' : 'waiting'} /> : <Router />}
+          </Suspense>
         </ToastProvider>
       </IonApp>
     </>

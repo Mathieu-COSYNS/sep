@@ -5,7 +5,11 @@ import { fetchCurrentUser, loginUser } from '~/api/userAPI';
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const token = localStorage.getItem('token');
-  const { isLoading, data: user } = useQuery({
+  const {
+    isLoading,
+    error,
+    data: user,
+  } = useQuery({
     queryKey: ['user', token],
     queryFn: fetchCurrentUser,
   });
@@ -23,5 +27,5 @@ export const useAuth = () => {
     queryClient.setQueryData(['user', null], null);
   };
 
-  return { isLoading, user, login, logout };
+  return { isLoading, error, user, login, logout };
 };
