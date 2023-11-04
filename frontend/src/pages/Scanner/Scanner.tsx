@@ -33,14 +33,17 @@ const Scanner: FC = () => {
   const { url } = useRouteMatch();
   const id = useIdParam();
 
-  const { isLoading, isError, data, error } = useQuery(['code', code], async () => {
-    if (code?.type === 'product') {
-      return productApi.fetchById(code.id);
-    }
-    if (code?.type === 'pack') {
-      return packApi.fetchById(code.id);
-    }
-    return null;
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ['code', code?.type, code?.id],
+    queryFn: async () => {
+      if (code?.type === 'product') {
+        return productApi.fetchById(code.id);
+      }
+      if (code?.type === 'pack') {
+        return packApi.fetchById(code.id);
+      }
+      return null;
+    },
   });
 
   useEffect(() => {

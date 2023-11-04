@@ -5,7 +5,10 @@ import { fetchCurrentUser, loginUser } from '~/api/userAPI';
 export const useAuth = () => {
   const queryClient = useQueryClient();
   const token = localStorage.getItem('token');
-  const { isLoading, data: user } = useQuery(['user', token], fetchCurrentUser);
+  const { isLoading, data: user } = useQuery({
+    queryKey: ['user', token],
+    queryFn: fetchCurrentUser,
+  });
 
   const login = async (username: string, password: string) => {
     const { token, ...user } = await loginUser(username, password);

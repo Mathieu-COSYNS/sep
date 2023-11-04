@@ -14,7 +14,10 @@ export interface PaymentPromptProps {
 const PaymentPrompt: FC<PaymentPromptProps> = ({ open, onDidDismiss, onDidFinish }) => {
   const [closing, setClosing] = useState<boolean>(false);
   const { basket, setPaymentMethod } = useBasketStore();
-  const paymentMethods = useQuery(['paymentMethods/all'], paymentMethodAPI.fetchAll);
+  const paymentMethods = useQuery({
+    queryKey: ['paymentMethods/all'],
+    queryFn: paymentMethodAPI.fetchAll,
+  });
 
   const autoSelectPayment =
     !paymentMethods.isLoading && paymentMethods.data?.length == 1 ? paymentMethods.data[0] : undefined;

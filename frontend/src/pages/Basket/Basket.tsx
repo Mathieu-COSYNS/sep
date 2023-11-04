@@ -24,7 +24,10 @@ const Basket: FC = () => {
   const Toast = useToast();
   const router = useIonRouter();
 
-  const { data } = useQuery(['sale', id], async () => (id ? saleApi.fetchById(id) : null));
+  const { data } = useQuery({
+    queryKey: ['sale', id],
+    queryFn: async () => (id ? saleApi.fetchById(id) : null),
+  });
   const { basket, loadSale } = useBasketStore();
   const isBasketDirty = useIsBasketDirty();
 

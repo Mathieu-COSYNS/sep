@@ -15,7 +15,10 @@ export const BasketRouter: FC = () => {
   const id = useIdParam();
   const { basket, reset, loadSale } = useBasketStore();
 
-  const { data } = useQuery(['sale', id], async () => (id ? saleApi.fetchById(id) : null));
+  const { data } = useQuery({
+    queryKey: ['sale', id],
+    queryFn: async () => (id ? saleApi.fetchById(id) : null),
+  });
 
   useEffect(() => {
     if (!id || basket.id !== id) reset();

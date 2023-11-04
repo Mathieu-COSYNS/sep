@@ -29,7 +29,7 @@ const Sales: FC = () => {
         reactInfiniteQueryOptions={{
           queryKey: ['sales-with-cursor'],
           queryFn: async ({ pageParam }) => {
-            const resp = await fetch(pageParam ?? `${environment.API_URL}/sales/?cursor=`, {
+            const resp = await fetch(pageParam, {
               method: 'GET',
               headers: new Headers({
                 'Content-Type': 'application/json',
@@ -39,6 +39,7 @@ const Sales: FC = () => {
             if (resp.status >= 400) throw new Error(`${resp.status} ${resp.statusText}`);
             return (await resp.json()) as { previous: string | null; next: string | null; results: Sale[] };
           },
+          initialPageParam: `${environment.API_URL}/sales/?cursor=`,
           getPreviousPageParam: (page) => page.previous,
           getNextPageParam: (page) => page.next,
         }}

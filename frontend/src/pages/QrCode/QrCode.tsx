@@ -20,9 +20,10 @@ const QrCode: FC = () => {
   const [size, setSize] = useState(+(localStorage.getItem('qr-code-size') || 256));
   const [background, setBackground] = useState((localStorage.getItem('qr-code-background') || 'true') === 'true');
   const id = useMemo(() => base58.decode(base58Id), [base58Id]);
-  const { isLoading, isError, data, error } = useQuery(['qrcode', slug, id], async () =>
-    fetchQrCode({ id, type: slug }),
-  );
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ['qrcode', slug, id],
+    queryFn: async () => fetchQrCode({ id, type: slug }),
+  });
   const shortName = isError ? '-' : `${typesMap[slug as TypesMapKeys]}${base58Id}`;
 
   const onImageDownload = () => {
